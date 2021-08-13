@@ -10,7 +10,7 @@
           flat
         ></q-btn>
       </div>
-      <div class="row justify-center items-center full-width q-pb-md">
+      <div class="row justify-center items-center full-width q-pb-xs">
         <q-select
           class="col-6 q-pa-sm"
           label="因子类型"
@@ -28,6 +28,23 @@
           clearable
         ></q-select>
       </div>
+      <div class="row justify-start items-center full-width q-pb-md">
+        <q-select
+          class="col-6 q-pa-sm"
+          label="因子大小"
+          v-model="geneSize"
+          :options="geneSizeOptions"
+          filled
+          clearable
+        ></q-select>
+        <q-input
+          class="col-6 q-pa-sm"
+          v-model="keyWord"
+          label="搜索"
+          filled
+          clearable
+        ></q-input>
+      </div>
     </div>
     <div class="virtual-wrap column justify-start items-center full-width">
       <div
@@ -40,7 +57,18 @@
         ></q-spinner-pie>
       </div>
       <div
-        v-else
+        v-if="geneMap.length === 0"
+        class="full-width q-my-xl column justify-center items-center"
+      >
+        <q-icon
+          name="search_off"
+          color="grey-6"
+          size="20vw"
+        ></q-icon>
+        <span class="text-h6 text-bold text-grey-6">什么也没找到 :P</span>
+      </div>
+      <div
+        v-if="!loadingGeneList"
         class="full-width"
       >
         <q-virtual-scroll
@@ -86,6 +114,8 @@ export default defineComponent({
 
     const geneType = ref(null)
     const geneEleType = ref(null)
+    const geneSize = ref(null)
+    const keyWord = ref(null)
 
     function initGeneList() {
       for (let i = 0; i < reactiveGeneList.value.length; i++) {
@@ -99,12 +129,11 @@ export default defineComponent({
       }
     }
 
-    function initGeneMap(typeFilter = null, eleFilter = null) {
+    function initGeneMap(typeFilter = null, eleFilter = null, sizeFilter = null, nameKey = null) {
       loadingGeneList.value = true
       let geneDataset = () => import('src/gene-dataset')
-      geneDataset().then((e) => {
-        loadingGeneList.value = true
-        geneMap.value = e.getGeneMap(typeFilter, eleFilter)
+      geneDataset().then((m) => {
+        geneMap.value = m.getGeneMap(typeFilter, eleFilter, sizeFilter, nameKey)
         loadingGeneList.value = false
       }).catch((err) => {
         loadingGeneList.value = false
@@ -122,12 +151,8 @@ export default defineComponent({
       initGeneMap()
     })
 
-    watch(geneType, () => {
-      initGeneMap(geneType.value, geneEleType.value)
-    })
-
-    watch(geneEleType, () => {
-      initGeneMap(geneType.value, geneEleType.value)
+    watch([geneType, geneEleType, geneSize, keyWord], () => {
+      initGeneMap(geneType.value, geneEleType.value, geneSize.value, keyWord.value)
     })
 
     return {
@@ -137,7 +162,10 @@ export default defineComponent({
       geneTypeOptions: ['力量', '技巧', '速度', '无'],
       geneEleTypeOptions: ['火', '水', '雷', '冰', '龙', '无'],
       geneMap,
-      loadingGeneList
+      loadingGeneList,
+      geneSize,
+      geneSizeOptions: ['小', '中', '大', '特大'],
+      keyWord
     }
   }
 })

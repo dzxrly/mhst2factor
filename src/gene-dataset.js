@@ -4389,7 +4389,7 @@ const geneDataset = [{
   'icon': 'https://cdn.max-c.com/wiki/1277400/雷_技巧.png'
 }]
 
-function getGeneMap(typeFilter = null, eleFilter = null) {
+function getGeneMap(typeFilter = null, eleFilter = null, sizeFilter = null, nameKey = null) {
   const geneMap = []
   geneDataset.forEach((val) => {
     if (typeFilter && eleFilter) {
@@ -4398,7 +4398,13 @@ function getGeneMap(typeFilter = null, eleFilter = null) {
       if (typeFilter === val.type || eleFilter === val.element) geneMap.push(val)
     } else geneMap.push(val)
   })
-  return geneMap
+  const tempGeneArr = sizeFilter ? geneMap.filter((val) => {
+    return val.id.indexOf(sizeFilter) !== -1
+  }) : geneMap
+
+  return nameKey ? tempGeneArr.filter((val) => {
+    return val.id.indexOf(nameKey) !== -1 || val.skill_desc.indexOf(nameKey) !== -1
+  }) : tempGeneArr
 }
 
 export {
