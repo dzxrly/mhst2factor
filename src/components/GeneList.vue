@@ -44,7 +44,7 @@
         class="full-width"
       >
         <q-virtual-scroll
-          style="max-height: 100vh"
+          style="max-height: 80vh"
           :items="geneMap"
           :items-size="10"
           separator
