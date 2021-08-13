@@ -1,13 +1,13 @@
 <template>
-  <router-view />
+  <router-view/>
 </template>
 <script>
-import { defineComponent, onMounted } from 'vue';
+import {defineComponent, onMounted} from 'vue'
 import {useQuasar} from 'quasar'
 
 export default defineComponent({
   name: 'App',
-  setup () {
+  setup() {
     const $q = useQuasar()
     onMounted(() => {
       console.info(`Quasar Version: ${$q.version}`)
@@ -15,3 +15,8 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="sass">
+::-webkit-scrollbar, ::-webkit-scrollbar-track, ::-webkit-scrollbar-track-piece
+  display: none
+</style>

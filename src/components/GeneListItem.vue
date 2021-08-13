@@ -24,7 +24,7 @@
       </q-avatar>
       <div class="col-8 column justify-start items-start q-pl-sm">
         <div class="col row justify-start items-center">
-          <span class="text-subtitle1 text-primary text-bold">{{ gene.skill }} | 绊值: {{ gene.cost }}</span>
+          <span class="text-subtitle1 text-primary text-bold">{{ gene.skill }} | 绊值: {{ gene.cost ? gene.cost : 0 }}</span>
         </div>
         <div class="col row justify-start items-center">
           <span class="text-body1 text-primary">{{ gene.skill_desc }}</span>

@@ -29,7 +29,7 @@
         ></q-select>
       </div>
     </div>
-    <div class="column justify-start items-center full-width">
+    <div class="virtual-wrap column justify-start items-center full-width">
       <div
         v-if="loadingGeneList"
         class="row justify-center items-center full-width q-my-xl"
@@ -43,33 +43,40 @@
         v-else
         class="full-width"
       >
-        <div
-          class="full-width"
-          v-for="(gene, index) in geneMap"
-          :key="index"
+        <q-virtual-scroll
+          style="max-height: 100vh"
+          :items="geneMap"
+          :items-size="10"
+          separator
         >
-          <gene-list-item :gene="gene"></gene-list-item>
-        </div>
+          <template v-slot="{ item, index }">
+            <q-item :key="index">
+              <q-item-section>
+                <gene-list-item :gene="item"></gene-list-item>
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-virtual-scroll>
       </div>
     </div>
   </q-card>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref, toRef, watch } from 'vue'
+<script>
+import {defineComponent, onMounted, ref, toRef, watch} from 'vue'
 import GeneListItem from './GeneListItem.vue'
-import { useQuasar } from 'quasar'
+import {useQuasar} from 'quasar'
 
 export default defineComponent({
   name: 'GeneList',
-  components: { GeneListItem },
+  components: {GeneListItem},
   emits: ['selected-gene'],
   props: {
     geneGrid: {
       type: Array
     }
   },
-  setup (props) {
+  setup(props) {
     const $q = useQuasar()
     const loadingGeneList = ref(true)
     const selectedGene = ref('')
@@ -80,7 +87,7 @@ export default defineComponent({
     const geneType = ref(null)
     const geneEleType = ref(null)
 
-    function initGeneList () {
+    function initGeneList() {
       for (let i = 0; i < reactiveGeneList.value.length; i++) {
         if (i !== 0 && i !== reactiveGeneList.value.length - 1) {
           for (let j = 0; j < reactiveGeneList.value[i].length; j++) {
@@ -92,7 +99,7 @@ export default defineComponent({
       }
     }
 
-    function initGeneMap (typeFilter = null, eleFilter = null) {
+    function initGeneMap(typeFilter = null, eleFilter = null) {
       loadingGeneList.value = true
       let geneDataset = () => import('src/gene-dataset')
       geneDataset().then((e) => {
