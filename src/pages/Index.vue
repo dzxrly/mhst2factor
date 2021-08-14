@@ -200,13 +200,21 @@
       <div class="gene-row gene-row-1"></div>
       <div class="gene-row gene-row-2"></div>
       <div class="gene-row gene-row-3"></div>
+      <div class="gene-row gene-row-4"></div>
+      <div class="gene-row gene-row-5"></div>
+      <div class="gene-row gene-row-6"></div>
 
       <div class="gene-col gene-col-1"></div>
       <div class="gene-col gene-col-2"></div>
       <div class="gene-col gene-col-3"></div>
+      <div class="gene-col gene-col-4"></div>
+      <div class="gene-col gene-col-5"></div>
+      <div class="gene-col gene-col-6"></div>
 
-      <div class="gene-slanted gene-slanted-1"></div>
-      <div class="gene-slanted gene-slanted-2"></div>
+      <div class="gene-row gene-row-slanted-1"></div>
+      <div class="gene-row gene-row-slanted-2"></div>
+      <div class="gene-row gene-row-slanted-3"></div>
+      <div class="gene-row gene-row-slanted-4"></div>
     </div>
 
     <q-dialog
@@ -335,7 +343,7 @@ export default defineComponent({
     display: grid
     grid-template-rows: 1fr 2fr 2fr 2fr 1fr
     grid-template-columns: 1fr 2fr 2fr 2fr 1fr
-    justify-content: center
+    justify-items: center
     align-items: center
 
     .gene-block
@@ -357,37 +365,69 @@ export default defineComponent({
 
     .gene-row
       position: absolute
-      left: 50%
-      width: 80vw
+      width: calc(75vw - (3.5rem + 2 * 0.4rem + 4px))
       height: calc((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale))
       background: $primary
-      transform: translateX(-50%)
       z-index: -1
 
     .gene-row-1
+      left: 12.5vw
       top: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-2
+      left: 12.5vw
       top: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-3
+      left: 12.5vw
+      top: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-row-4
+      right: 12.5vw
+      top: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-row-5
+      right: 12.5vw
+      top: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-row-6
+      right: 12.5vw
       top: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col
       position: absolute
-      top: 50%
       width: calc((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale))
-      height: 80vw
+      height: calc(75vw - (3.5rem + 2 * 0.4rem + 4px))
       background: $primary
-      transform: translateY(-50%)
       z-index: -1
 
     .gene-col-1
+      top: 12.5vw
       left: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-2
+      top: 12.5vw
       left: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-3
+      top: 12.5vw
       left: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-col-4
+      bottom: 12.5vw
+      left: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-col-5
+      bottom: 12.5vw
+      left: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-col-6
+      bottom: 12.5vw
+      left: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-row-slanted-1
+      top: 50%
+      left: 12.5vw
+      width: calc(100vw - (3.5rem + 2 * 0.4rem + 4px))
+      transform: translateY(-50%) rotate(45deg)
 </style>
