@@ -10,6 +10,21 @@
           flat
         ></q-btn>
       </div>
+      <q-slide-transition>
+        <div
+          v-if="JSON.stringify(refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]]) !== '{}'"
+          class="row bg-white justify-between items-center full-width q-pa-md"
+        >
+          <span>已选中<span class="text-bold">{{ refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id }}</span></span>
+          <q-btn
+            label="清除"
+            icon="delete"
+            color="negative"
+            @click="refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]] = {}"
+            outline
+          ></q-btn>
+        </div>
+      </q-slide-transition>
       <div class="row justify-center items-center full-width q-pb-xs">
         <q-select
           class="col-6 q-pa-sm"
@@ -78,9 +93,15 @@
           separator
         >
           <template v-slot="{ item, index }">
-            <q-item :key="index">
+            <q-item
+              :class="{'disabled-item' : isGeneUsed(item)}"
+              :key="index"
+            >
               <q-item-section>
-                <gene-list-item :gene="item"></gene-list-item>
+                <gene-list-item
+                  :gene="item"
+                  @confirm-gene="confirmGene"
+                ></gene-list-item>
               </q-item-section>
             </q-item>
           </template>
@@ -98,17 +119,24 @@ import {useQuasar} from 'quasar'
 export default defineComponent({
   name: 'GeneList',
   components: {GeneListItem},
-  emits: ['selected-gene'],
+  emits: ['selected-gene', 'update:gene-grid', 'close-dialog'],
   props: {
     geneGrid: {
       type: Array
+    },
+    selectedGeneIndex: {
+      type: Array,
+      default: () => {
+        return [1, 1]
+      }
     }
   },
-  setup(props) {
+  setup(props, context) {
     const $q = useQuasar()
     const loadingGeneList = ref(true)
-    const selectedGene = ref('')
-    const reactiveGeneList = toRef(props, 'geneGrid')
+    const reactiveGeneGrid = toRef(props, 'geneGrid')
+    const refGeneGrid = ref(reactiveGeneGrid)
+    const reactiveGeneIndex = toRef(props, 'selectedGeneIndex')
     const canNotUseGeneList = ref([])
     const geneMap = ref([])
 
@@ -118,11 +146,11 @@ export default defineComponent({
     const keyWord = ref(null)
 
     function initGeneList() {
-      for (let i = 0; i < reactiveGeneList.value.length; i++) {
-        if (i !== 0 && i !== reactiveGeneList.value.length - 1) {
-          for (let j = 0; j < reactiveGeneList.value[i].length; j++) {
-            if (j !== 0 && j !== reactiveGeneList.value[i].length - 1) {
-              canNotUseGeneList.value.push(reactiveGeneList.value[i][j])
+      for (let i = 0; i < reactiveGeneGrid.value.length; i++) {
+        if (i !== 0 && i !== reactiveGeneGrid.value.length - 1) {
+          for (let j = 0; j < reactiveGeneGrid.value[i].length; j++) {
+            if (j !== 0 && j !== reactiveGeneGrid.value[i].length - 1) {
+              canNotUseGeneList.value.push(reactiveGeneGrid.value[i][j])
             }
           }
         }
@@ -145,6 +173,25 @@ export default defineComponent({
       })
     }
 
+    function isGeneUsed(gene) {
+      for (let i = 1; i < refGeneGrid.value.length - 1; i++) {
+        for (let j = 1; j < refGeneGrid.value[i].length - 1; j++) {
+          if (!(i === reactiveGeneIndex.value[0] &&
+            j === reactiveGeneIndex.value[1]) &&
+            refGeneGrid.value[i][j].id === gene.id) {
+            return true
+          }
+        }
+      }
+      return false
+    }
+
+    function confirmGene(gene) {
+      refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]] = gene
+      context.emit('update:gene-grid', refGeneGrid.value)
+      context.emit('close-dialog')
+    }
+
     initGeneList()
 
     onMounted(() => {
@@ -156,7 +203,6 @@ export default defineComponent({
     })
 
     return {
-      selectedGene,
       geneType,
       geneEleType,
       geneTypeOptions: ['力量', '技巧', '速度', '无'],
@@ -165,7 +211,12 @@ export default defineComponent({
       loadingGeneList,
       geneSize,
       geneSizeOptions: ['小', '中', '大', '特大'],
-      keyWord
+      keyWord,
+      refGeneGrid,
+      reactiveGeneIndex,
+
+      isGeneUsed,
+      confirmGene
     }
   }
 })
@@ -183,4 +234,26 @@ export default defineComponent({
     position: -webkit-sticky
     top: 0
     z-index: 6010
+
+  .virtual-wrap
+    .disabled-item
+      position: relative
+      pointer-events: none
+
+    .disabled-item::before
+      content: '该因子已被使用'
+      position: absolute
+      top: 0
+      left: 0
+      width: 100vw
+      height: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      color: white
+      font-size: 2rem
+      font-weight: bold
+      background: rgba(0, 0, 0, 0.5)
+      z-index: 6009
+      pointer-events: none
 </style>

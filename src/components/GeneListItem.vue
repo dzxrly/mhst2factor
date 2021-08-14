@@ -18,14 +18,7 @@
       </q-chip>
     </div>
     <div class="gene-info row justify-start items-center full-width no-wrap">
-      <q-avatar
-        size="xl"
-      >
-        <img
-          :src="gene.icon"
-          :alt="gene.id"
-        >
-      </q-avatar>
+      <gene-icon :gene="gene"></gene-icon>
       <div class="col-8 column justify-start items-start q-pl-sm">
         <div class="col row justify-start items-center">
           <span class="text-subtitle1 text-primary text-bold">{{ gene.skill }} | 绊值: {{
@@ -62,6 +55,7 @@
             label="添加"
             icon="add"
             color="primary"
+            @click="confirmGene"
             flat
           ></q-btn>
           <q-btn
@@ -80,39 +74,40 @@
 <script>
 import {defineComponent, ref} from 'vue'
 import SkillInfo from 'components/SkillInfo'
+import GeneIcon from 'components/GeneIcon'
+import {fetchEleColor, fetchTypeColor} from 'src/utils'
 
 export default defineComponent({
   name: 'GeneListItem',
-  components: {SkillInfo},
+  components: {GeneIcon, SkillInfo},
+  emits: ['confirm-gene'],
   props: {
     gene: {
       type: Object
     }
   },
-  setup() {
+  setup(props, context) {
     const showInfoDialog = ref(false)
 
     function getTypeColor(type) {
-      if (type === '力量') return 'red-9'
-      else if (type === '技巧') return 'green-7'
-      else if (type === '速度') return 'blue-10'
-      else return 'grey-6'
+      return fetchTypeColor(type)
     }
 
     function getEleColor(ele) {
-      if (ele === '火') return 'negative'
-      else if (ele === '水') return 'blue-8'
-      else if (ele === '冰') return 'info'
-      else if (ele === '雷') return 'warning'
-      else if (ele === '龙') return 'accent'
-      else return 'grey-6'
+      return fetchEleColor(ele)
+    }
+
+    function confirmGene() {
+      context.emit('confirm-gene', props.gene)
+      showInfoDialog.value = false
     }
 
     return {
       showInfoDialog,
 
       getTypeColor,
-      getEleColor
+      getEleColor,
+      confirmGene
     }
   }
 })

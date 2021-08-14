@@ -1,4 +1,18 @@
 const skillDataset = [{
+  'id': '虹色基因',
+  'type': '虹色',
+  'ele': '虹色',
+  'sk_type': '被动',
+  'desc': '可替代任意类型或属性的因子进行Bingo。',
+  'upgrade_eff_array': '',
+  'up_n1_array': '',
+  'up_n2_array': '',
+  'act': '0',
+  'tar': '我方单体',
+  'cost': '0',
+  'icon': '',
+  'out': '虹色基因'
+}, {
   'id': '旋转甩尾',
   'type': '技巧',
   'ele': '无',

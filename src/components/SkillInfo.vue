@@ -14,14 +14,7 @@
       </q-chip>
     </div>
     <div class="gene-info row justify-start items-center full-width no-wrap q-px-md">
-      <q-avatar
-        size="xl"
-      >
-        <img
-          :src="gene.icon"
-          :alt="gene.id"
-        >
-      </q-avatar>
+      <gene-icon :gene="gene"></gene-icon>
       <div class="col-8 column justify-start items-start q-pl-sm">
         <div class="col row justify-start items-center">
           <span class="text-subtitle1 text-primary text-bold">{{ gene.skill }} | 绊值: {{
@@ -113,8 +106,14 @@
         </q-item>
       </q-list>
     </div>
-    <q-separator spaced="md"/>
-    <div class="full-width q-px-md text-body1">
+    <q-separator
+      v-if="skillInfo && skillInfo.upgrade_eff_array"
+      spaced="md"
+    />
+    <div
+      class="full-width q-px-md text-body1"
+      v-if="gene.fixed_array"
+    >
       <q-list class="full-width">
         <q-item-label header>因子出处</q-item-label>
         <q-item
@@ -133,9 +132,12 @@
 <script>
 import {defineComponent, onMounted, ref, toRefs} from 'vue'
 import {useQuasar} from 'quasar'
+import GeneIcon from 'components/GeneIcon'
+import {fetchEleColor, fetchTypeColor} from 'src/utils'
 
 export default defineComponent({
   name: 'SkillInfo',
+  components: {GeneIcon},
   props: {
     gene: {
       type: Object,
@@ -165,19 +167,11 @@ export default defineComponent({
     }
 
     function getTypeColor(type) {
-      if (type === '力量') return 'red-9'
-      else if (type === '技巧') return 'green-7'
-      else if (type === '速度') return 'blue-10'
-      else return 'grey-6'
+      return fetchTypeColor(type)
     }
 
     function getEleColor(ele) {
-      if (ele === '火') return 'negative'
-      else if (ele === '水') return 'blue-8'
-      else if (ele === '冰') return 'info'
-      else if (ele === '雷') return 'warning'
-      else if (ele === '龙') return 'accent'
-      else return 'grey-6'
+      return fetchEleColor(ele)
     }
 
     onMounted(() => {

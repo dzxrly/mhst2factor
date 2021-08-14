@@ -1,4 +1,15 @@
 const geneDataset = [{
+  'id': '虹色基因',
+  'type': '虹色',
+  'element': '虹色',
+  'level': '0',
+  'skill': '虹色基因',
+  'skill_desc': '可替代任意类型或属性的因子进行Bingo。',
+  'fixed_array': '',
+  'code': '999',
+  'cost': '0',
+  'icon': ''
+}, {
   'id': '鞭子基因【小】',
   'type': '技巧',
   'element': '无',
@@ -4399,7 +4410,7 @@ function getGeneMap(typeFilter = null, eleFilter = null, sizeFilter = null, name
     } else geneMap.push(val)
   })
   const tempGeneArr = sizeFilter ? geneMap.filter((val) => {
-    return val.id.indexOf(sizeFilter) !== -1
+    return val.id.indexOf(`【${sizeFilter}】`) !== -1
   }) : geneMap
 
   return nameKey ? tempGeneArr.filter((val) => {

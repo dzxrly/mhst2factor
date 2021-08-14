@@ -17,11 +17,11 @@
     </q-page-container>
 
     <q-footer class="bg-white text-primary">
-      <div class="footer-wrap q-my-md text-grey-6 text-subtitle2 row full-width justify-center items-center">
-        <div class="col-4 row justify-end items-center q-px-sm">
+      <div class="footer-wrap q-my-md text-grey-6 text-subtitle2 column justify-center items-center">
+        <div class="row justify-end items-center q-pa-sm">
           <q-avatar
             class="avatar shadow-4"
-            size="sm"
+            size="md"
           >
             <img
               src="~assets/avatar.jpeg"
@@ -29,10 +29,12 @@
             >
           </q-avatar>
         </div>
-        <div class="col-8 row justify-start items-center q-px-sm">
-          <div class="column justify-center items-start">
-            <span>Made By 鎧羅突擊弩賊&nbsp;&nbsp;</span>
-            <span>HeyBox ID: 1310911</span>
+        <div class="row justify-center items-center q-px-sm">
+          <div class="column justify-center items-center">
+            <span>Made By 鎧羅突擊弩賊</span>
+            <span>Copyright<q-icon name="copyright"></q-icon> {{
+                startYear
+              }} | <span @click="openLink('https://github.com/dzxrly/mhst2factor')">Github</span></span>
           </div>
         </div>
       </div>
@@ -43,11 +45,27 @@
 
 <script>
 
-import {defineComponent} from 'vue'
+import {computed, defineComponent, ref} from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
   setup() {
+    const startYear = ref('2021')
+
+    const getYear = computed(() => {
+      return new Date().getFullYear().toString() === startYear.value ? startYear.value : `${startYear.value}-${new Date().getFullYear().toString()}`
+    })
+
+    const openLink = (link) => {
+      window.open(link)
+    }
+
+    return {
+      startYear,
+      getYear,
+
+      openLink
+    }
   }
 })
 </script>
