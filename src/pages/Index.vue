@@ -1,6 +1,6 @@
 <template>
   <q-page class="index-wrap full-width column justify-start items-center">
-    <div class="gene-grid q-my-md">
+    <div class="gene-grid q-my-md relative-position">
       <div
         :class="{ 'hide-gene-item' : !geneGrid[0][0] || JSON.stringify(geneGrid[0][0]) === '{}' }"
         class="gene-item relative-position"
@@ -38,7 +38,7 @@
       >G
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(1, 1)"
         v-ripple
       >
@@ -49,7 +49,7 @@
         ></gene-icon>
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(1, 2)"
         v-ripple
       >
@@ -60,7 +60,7 @@
         ></gene-icon>
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(1, 3)"
         v-ripple
       >
@@ -83,7 +83,7 @@
       >G
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(2, 1)"
         v-ripple
       >
@@ -94,7 +94,7 @@
         ></gene-icon>
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(2, 2)"
         v-ripple
       >
@@ -105,7 +105,7 @@
         ></gene-icon>
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(2, 3)"
         v-ripple
       >
@@ -128,7 +128,7 @@
       >G
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(3, 1)"
         v-ripple
       >
@@ -139,7 +139,7 @@
         ></gene-icon>
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(3, 2)"
         v-ripple
       >
@@ -150,7 +150,7 @@
         ></gene-icon>
       </div>
       <div
-        class="gene-block text-primary relative-position overflow-hidden"
+        class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(3, 3)"
         v-ripple
       >
@@ -196,6 +196,17 @@
         v-ripple
       >G
       </div>
+
+      <div class="gene-row gene-row-1"></div>
+      <div class="gene-row gene-row-2"></div>
+      <div class="gene-row gene-row-3"></div>
+
+      <div class="gene-col gene-col-1"></div>
+      <div class="gene-col gene-col-2"></div>
+      <div class="gene-col gene-col-3"></div>
+
+      <div class="gene-slanted gene-slanted-1"></div>
+      <div class="gene-slanted gene-slanted-2"></div>
     </div>
 
     <q-dialog
@@ -245,6 +256,24 @@ export default defineComponent({
             show: true,
             type: geneGrid.value[index1[0]][index1[1]].type
           }
+        } else if (geneGrid.value[index1[0]][index1[1]].type === '虹色' &&
+          geneGrid.value[index3[0]][index3[1]].type === geneGrid.value[index2[0]][index2[1]].type) {
+          return {
+            show: true,
+            type: geneGrid.value[index2[0]][index2[1]].type
+          }
+        } else if (geneGrid.value[index2[0]][index2[1]].type === '虹色' &&
+          geneGrid.value[index3[0]][index3[1]].type === geneGrid.value[index1[0]][index1[1]].type) {
+          return {
+            show: true,
+            type: geneGrid.value[index1[0]][index1[1]].type
+          }
+        } else if (geneGrid.value[index3[0]][index3[1]].type === '虹色' &&
+          geneGrid.value[index2[0]][index2[1]].type === geneGrid.value[index1[0]][index1[1]].type) {
+          return {
+            show: true,
+            type: geneGrid.value[index2[0]][index2[1]].type
+          }
         } else return {
           show: false
         }
@@ -254,6 +283,24 @@ export default defineComponent({
           return {
             show: true,
             element: geneGrid.value[index1[0]][index1[1]].element
+          }
+        } else if (geneGrid.value[index1[0]][index1[1]].element === '虹色' &&
+          geneGrid.value[index3[0]][index3[1]].element === geneGrid.value[index2[0]][index2[1]].element) {
+          return {
+            show: true,
+            element: geneGrid.value[index2[0]][index2[1]].element
+          }
+        } else if (geneGrid.value[index2[0]][index2[1]].element === '虹色' &&
+          geneGrid.value[index3[0]][index3[1]].element === geneGrid.value[index1[0]][index1[1]].element) {
+          return {
+            show: true,
+            element: geneGrid.value[index1[0]][index1[1]].element
+          }
+        } else if (geneGrid.value[index3[0]][index3[1]].element === '虹色' &&
+          geneGrid.value[index2[0]][index2[1]].element === geneGrid.value[index1[0]][index1[1]].element) {
+          return {
+            show: true,
+            element: geneGrid.value[index2[0]][index2[1]].element
           }
         } else return {
           show: false
@@ -280,6 +327,8 @@ export default defineComponent({
   lang="sass"
 >
 .index-wrap
+  --line-scale: 5
+
   .gene-grid
     width: 100vw
     height: 100vw
@@ -305,4 +354,40 @@ export default defineComponent({
     .hide-gene-item
       opacity: 0
       cursor: default
+
+    .gene-row
+      position: absolute
+      left: 50%
+      width: 80vw
+      height: calc((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale))
+      background: $primary
+      transform: translateX(-50%)
+      z-index: -1
+
+    .gene-row-1
+      top: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-row-2
+      top: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-row-3
+      top: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-col
+      position: absolute
+      top: 50%
+      width: calc((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale))
+      height: 80vw
+      background: $primary
+      transform: translateY(-50%)
+      z-index: -1
+
+    .gene-col-1
+      left: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-col-2
+      left: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
+
+    .gene-col-3
+      left: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 </style>
