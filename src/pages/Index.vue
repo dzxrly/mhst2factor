@@ -2,40 +2,58 @@
   <q-page class="index-wrap full-width column justify-start items-center">
     <div class="gene-grid q-my-md relative-position">
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[0][0] || JSON.stringify(geneGrid[0][0]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([1, 1], [2, 2], [3, 3], 'Element').show"
+          :ele="lineJudge([1, 1], [2, 2], [3, 3], 'Element').element"
+        ></element-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[0][1] || JSON.stringify(geneGrid[0][1]) === '{}'}"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([1, 1], [2, 1], [3, 1], 'Element').show"
+          :ele="lineJudge([1, 1], [2, 1], [3, 1], 'Element').element"
+        ></element-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[0][2] || JSON.stringify(geneGrid[0][2]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([1, 2], [2, 2], [3, 2], 'Element').show"
+          :ele="lineJudge([1, 2], [2, 2], [3, 2], 'Element').element"
+        ></element-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[0][3] || JSON.stringify(geneGrid[0][3]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([1, 3], [2, 3], [3, 3], 'Element').show"
+          :ele="lineJudge([1, 3], [2, 3], [3, 3], 'Element').element"
+        ></element-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[0][4] || JSON.stringify(geneGrid[0][4]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([1, 3], [2, 2], [3, 1], 'Type').show"
+          :type="lineJudge([1, 3], [2, 2], [3, 1], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[1][0] || JSON.stringify(geneGrid[1][0]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([1, 1], [1, 2], [1, 3], 'Element').show"
+          :ele="lineJudge([1, 1], [1, 2], [1, 3], 'Element').element"
+        ></element-icon>
       </div>
       <div
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
@@ -71,16 +89,22 @@
         ></gene-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[1][4] || JSON.stringify(geneGrid[1][4]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([1, 1], [1, 2], [1, 3], 'Type').show"
+          :type="lineJudge([1, 1], [1, 2], [1, 3], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[2][0] || JSON.stringify(geneGrid[2][0]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([2, 1], [2, 2], [2, 3], 'Element').show"
+          :ele="lineJudge([2, 1], [2, 2], [2, 3], 'Element').element"
+        ></element-icon>
       </div>
       <div
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
@@ -116,16 +140,22 @@
         ></gene-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[2][4] || JSON.stringify(geneGrid[2][4]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([2, 1], [2, 2], [2, 3], 'Type').show"
+          :type="lineJudge([2, 1], [2, 2], [2, 3], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[3][0] || JSON.stringify(geneGrid[3][0]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([3, 1], [3, 2], [3, 3], 'Element').show"
+          :ele="lineJudge([3, 1], [3, 2], [3, 3], 'Element').element"
+        ></element-icon>
       </div>
       <div
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
@@ -161,61 +191,129 @@
         ></gene-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[3][4] || JSON.stringify(geneGrid[3][4]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([3, 1], [3, 2], [3, 3], 'Type').show"
+          :type="lineJudge([3, 1], [3, 2], [3, 3], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[4][0] || JSON.stringify(geneGrid[4][0]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <element-icon
+          v-if="lineJudge([3, 1], [2, 2], [1, 3], 'Element').show"
+          :ele="lineJudge([3, 1], [2, 2], [1, 3], 'Element').element"
+        ></element-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[4][1] || JSON.stringify(geneGrid[4][1]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([1, 1], [2, 1], [3, 1], 'Type').show"
+          :type="lineJudge([1, 1], [2, 1], [3, 1], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[4][2] || JSON.stringify(geneGrid[4][2]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([1, 2], [2, 2], [3, 2], 'Type').show"
+          :type="lineJudge([1, 2], [2, 2], [3, 2], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[4][3] || JSON.stringify(geneGrid[4][3]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([1, 3], [2, 3], [3, 3], 'Type').show"
+          :type="lineJudge([1, 3], [2, 3], [3, 3], 'Type').type"
+        ></type-icon>
       </div>
       <div
-        :class="{ 'hide-gene-item' : !geneGrid[4][4] || JSON.stringify(geneGrid[4][4]) === '{}' }"
         class="gene-item relative-position"
         v-ripple
-      >G
+      >
+        <type-icon
+          v-if="lineJudge([1, 1], [2, 2], [3, 3], 'Type').show"
+          :type="lineJudge([1, 1], [2, 2], [3, 3], 'Type').type"
+        ></type-icon>
       </div>
 
-      <div class="gene-row gene-row-1"></div>
-      <div class="gene-row gene-row-2"></div>
-      <div class="gene-row gene-row-3"></div>
-      <div class="gene-row gene-row-4"></div>
-      <div class="gene-row gene-row-5"></div>
-      <div class="gene-row gene-row-6"></div>
+      <div
+        v-if="lineJudge([1, 1], [1 ,2], [1, 3], 'Element').show"
+        class="gene-row gene-row-1"
+      ></div>
+      <div
+        v-if="lineJudge([2, 1], [2 ,2], [2, 3], 'Element').show"
+        class="gene-row gene-row-2"
+      ></div>
+      <div
+        v-if="lineJudge([3, 1], [3 ,2], [3, 3], 'Element').show"
+        class="gene-row gene-row-3"
+      ></div>
+      <div
+        v-if="lineJudge([1, 1], [1 ,2], [1, 3], 'Type').show"
+        class="gene-row gene-row-4"
+      ></div>
+      <div
+        v-if="lineJudge([2, 1], [2 ,2], [2, 3], 'Type').show"
+        class="gene-row gene-row-5"
+      ></div>
+      <div
+        v-if="lineJudge([3, 1], [3 ,2], [3, 3], 'Type').show"
+        class="gene-row gene-row-6"
+      ></div>
 
-      <div class="gene-col gene-col-1"></div>
-      <div class="gene-col gene-col-2"></div>
-      <div class="gene-col gene-col-3"></div>
-      <div class="gene-col gene-col-4"></div>
-      <div class="gene-col gene-col-5"></div>
-      <div class="gene-col gene-col-6"></div>
+      <div
+        v-if="lineJudge([1, 1], [2, 1], [3, 1], 'Element').show"
+        class="gene-col gene-col-1"
+      ></div>
+      <div
+        v-if="lineJudge([1, 2], [2, 2], [3, 2], 'Element').show"
+        class="gene-col gene-col-2"
+      ></div>
+      <div
+        v-if="lineJudge([1, 3], [2, 3], [3, 3], 'Element').show"
+        class="gene-col gene-col-3"
+      ></div>
+      <div
+        v-if="lineJudge([1, 1], [2, 1], [3, 1], 'Type').show"
+        class="gene-col gene-col-4"
+      ></div>
+      <div
+        v-if="lineJudge([1, 2], [2, 2], [3, 2], 'Type').show"
+        class="gene-col gene-col-5"
+      ></div>
+      <div
+        v-if="lineJudge([1, 3], [2, 3], [3, 3], 'Type').show"
+        class="gene-col gene-col-6"
+      ></div>
 
-      <div class="gene-row gene-row-slanted-1"></div>
-      <div class="gene-row gene-row-slanted-2"></div>
-      <div class="gene-row gene-row-slanted-3"></div>
-      <div class="gene-row gene-row-slanted-4"></div>
+      <div
+        v-if="lineJudge([1, 1], [2, 2], [3, 3], 'Element').show"
+        class="gene-row gene-row-slanted-1"
+      ></div>
+      <div
+        v-if="lineJudge([1, 3], [2, 2], [3, 1], 'Type').show"
+        class="gene-row gene-row-slanted-2"
+      ></div>
+      <div
+        v-if="lineJudge([1, 1], [2, 2], [3, 3], 'Type').show"
+        class="gene-row gene-row-slanted-3"
+      ></div>
+      <div
+        v-if="lineJudge([1, 3], [2, 2], [3, 1], 'Element').show"
+        class="gene-row gene-row-slanted-4"
+      ></div>
     </div>
+
+    <q-separator class="full-width" spaced="md"/>
 
     <q-dialog
       class="gene-list-dialog"
@@ -233,13 +331,15 @@
 </template>
 
 <script>
-import {defineComponent, ref} from 'vue'
+import {computed, defineComponent, ref} from 'vue'
 import GeneList from 'components/GeneList'
 import GeneIcon from 'components/GeneIcon'
+import ElementIcon from 'components/ElementIcon'
+import TypeIcon from 'components/TypeIcon'
 
 export default defineComponent({
   name: 'PageIndex',
-  components: {GeneIcon, GeneList},
+  components: {TypeIcon, ElementIcon, GeneIcon, GeneList},
   setup() {
     const geneGrid = ref([
       [{}, {}, {}, {}, {}],
@@ -256,9 +356,13 @@ export default defineComponent({
       openGeneDialog.value = true
     }
 
-    function lineJudge(index1, index2, index3, judgeType) {
+    const lineJudge = computed(() => (index1, index2, index3, judgeType) => {
       if (judgeType === 'Type') {
-        if (geneGrid.value[index1[0]][index1[1]].type === geneGrid.value[index2[0]][index2[1]].type &&
+        if (!geneGrid.value[index1[0]][index1[1]].type || !geneGrid.value[index3[0]][index3[1]].type || !geneGrid.value[index2[0]][index2[1]].type) {
+          return {
+            show: false
+          }
+        } else if (geneGrid.value[index1[0]][index1[1]].type === geneGrid.value[index2[0]][index2[1]].type &&
           geneGrid.value[index3[0]][index3[1]].type === geneGrid.value[index2[0]][index2[1]].type) {
           return {
             show: true,
@@ -286,7 +390,11 @@ export default defineComponent({
           show: false
         }
       } else if (judgeType === 'Element') {
-        if (geneGrid.value[index1[0]][index1[1]].element === geneGrid.value[index2[0]][index2[1]].element &&
+        if (!geneGrid.value[index1[0]][index1[1]].element || !geneGrid.value[index3[0]][index3[1]].element || !geneGrid.value[index2[0]][index2[1]].element) {
+          return {
+            show: false
+          }
+        } else if (geneGrid.value[index1[0]][index1[1]].element === geneGrid.value[index2[0]][index2[1]].element &&
           geneGrid.value[index3[0]][index3[1]].element === geneGrid.value[index2[0]][index2[1]].element) {
           return {
             show: true,
@@ -316,7 +424,7 @@ export default defineComponent({
       } else return {
         show: false
       }
-    }
+    })
 
     return {
       geneGrid,
@@ -335,7 +443,7 @@ export default defineComponent({
   lang="sass"
 >
 .index-wrap
-  --line-scale: 5
+  --line-scale: 6
 
   .gene-grid
     width: 100vw
@@ -359,75 +467,93 @@ export default defineComponent({
       background: white
       cursor: pointer
 
-    .hide-gene-item
-      opacity: 0
-      cursor: default
-
     .gene-row
       position: absolute
-      width: calc(75vw - (3.5rem + 2 * 0.4rem + 4px))
+      width: calc(5 * 12.5vw + 6.25vw)
       height: calc((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale))
       background: $primary
       z-index: -1
 
     .gene-row-1
-      left: 12.5vw
+      left: 6.25vw
       top: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-2
-      left: 12.5vw
+      left: 6.25vw
       top: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-3
-      left: 12.5vw
+      left: 6.25vw
       top: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-4
-      right: 12.5vw
+      right: 6.25vw
       top: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-5
-      right: 12.5vw
+      right: 6.25vw
       top: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-6
-      right: 12.5vw
+      right: 6.25vw
       top: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col
       position: absolute
       width: calc((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale))
-      height: calc(75vw - (3.5rem + 2 * 0.4rem + 4px))
+      height: calc(5 * 12.5vw + 6.25vw)
       background: $primary
       z-index: -1
 
     .gene-col-1
-      top: 12.5vw
+      top: 6.25vw
       left: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-2
-      top: 12.5vw
+      top: 6.25vw
       left: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-3
-      top: 12.5vw
+      top: 6.25vw
       left: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-4
-      bottom: 12.5vw
+      bottom: 6.25vw
       left: calc(12.5vw + 12.5vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-5
-      bottom: 12.5vw
+      bottom: 6.25vw
       left: calc(12.5vw + 12.5vw + 25vw - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-col-6
-      bottom: 12.5vw
+      bottom: 6.25vw
       left: calc(12.5vw + 12.5vw + 25vw * 2 - ((3.5rem + 2 * 0.4rem + 4px) / var(--line-scale) / 2))
 
     .gene-row-slanted-1
-      top: 50%
-      left: 12.5vw
-      width: calc(100vw - (3.5rem + 2 * 0.4rem + 4px))
+      top: 6.25vw
+      left: 6.25vw
+      width: calc(7.1 * 12.5vw + 6.25vw)
+      transform-origin: 0 50%
       transform: translateY(-50%) rotate(45deg)
+
+    .gene-row-slanted-2
+      top: 6.25vw
+      left: calc(100vw / 16 * 15)
+      width: calc(7.1 * 12.5vw + 6.25vw)
+      transform-origin: 0 50%
+      transform: translateY(-50%) rotate(135deg)
+
+    .gene-row-slanted-3
+      top: calc(6.25vw + 18.75vw)
+      left: calc(6.25vw + 18.75vw)
+      width: calc(7.1 * 12.5vw + 6.25vw)
+      transform-origin: 0 50%
+      transform: translateY(-50%) rotate(45deg)
+
+    .gene-row-slanted-4
+      top: calc(6.25vw + 18.75vw)
+      left: calc(100vw / 16 * 15 - 18.75vw)
+      width: calc(7.1 * 12.5vw + 6.25vw)
+      transform-origin: 0 50%
+      transform: translateY(-50%) rotate(135deg)
 </style>

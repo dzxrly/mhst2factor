@@ -17,9 +17,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import {getGeneSizeBorderColor, getGeneSizeByName, typeNameTranslate, fetchTypeColor, fetchEleColor} from 'src/utils.js'
+<script>
+import {defineComponent} from 'vue'
+import {fetchEleColor, fetchTypeColor, getGeneSizeBorderColor, getGeneSizeByName, typeNameTranslate} from 'src/utils.js'
 
 export default defineComponent({
   name: 'GeneIcon',
@@ -33,7 +33,7 @@ export default defineComponent({
       default: '3.5rem'
     }
   },
-  setup () {
+  setup() {
     function getTypeColor(type) {
       return fetchTypeColor(type)
     }
@@ -60,7 +60,10 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="sass">
+<style
+  scoped
+  lang="sass"
+>
 .gene-icon-wrap
   .rainbow
     background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red) !important

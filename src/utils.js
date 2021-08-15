@@ -13,6 +13,23 @@ function typeNameTranslate(name) {
   }
 }
 
+function eleNameTranslate(name) {
+  switch (name) {
+    case '火':
+      return 'fire'
+    case '水':
+      return 'water'
+    case '雷':
+      return 'thunder'
+    case '冰':
+      return 'ice'
+    case '龙':
+      return 'dragon'
+    default:
+      return 'null'
+  }
+}
+
 function getGeneSizeByName(name) {
   if (name.indexOf('【小】') !== -1) return '小'
   else if (name.indexOf('【中】') !== -1) return '中'
@@ -55,6 +72,7 @@ function fetchEleColor(ele) {
 }
 
 export {
+  eleNameTranslate,
   typeNameTranslate,
   getGeneSizeByName,
   getGeneSizeBorderColor,
