@@ -4,6 +4,7 @@
       <q-avatar
         class="avatar shadow-4"
         size="md"
+        @click="openLink('https://github.com/dzxrly/mhst2factor')"
       >
         <img
           src="~assets/avatar.jpeg"
@@ -13,21 +14,21 @@
     </div>
     <div class="row justify-center items-center q-px-sm">
       <div class="column justify-center items-center">
-        <span>Made By 鎧羅突擊弩賊 | 访问量<span id="busuanzi_value_site_pv"></span>次</span>
+        <span>By 鎧羅突擊弩賊</span>
         <span>Copyright<q-icon name="copyright"></q-icon> {{
             startYear
-          }} | <span @click="openLink('https://github.com/dzxrly/mhst2factor')">Github</span></span>
+          }} | <span>访问量<span id="busuanzi_value_site_pv"></span>次</span></span>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'CustomFooter',
-  setup() {
+  setup () {
     const startYear = ref('2021')
 
     const getYear = computed(() => {
