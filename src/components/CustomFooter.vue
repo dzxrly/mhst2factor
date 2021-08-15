@@ -13,7 +13,7 @@
     </div>
     <div class="row justify-center items-center q-px-sm">
       <div class="column justify-center items-center">
-        <span>Made By 鎧羅突擊弩賊</span>
+        <span>Made By 鎧羅突擊弩賊 | 访问量<span id="busuanzi_value_site_pv"></span>次</span>
         <span>Copyright<q-icon name="copyright"></q-icon> {{
             startYear
           }} | <span @click="openLink('https://github.com/dzxrly/mhst2factor')">Github</span></span>
