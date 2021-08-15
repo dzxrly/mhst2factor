@@ -1,9 +1,9 @@
 {
   "name": "mhst2factor",
   "version": "v1.0.0-beta",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
-  "author": "dzxrly <919617516@qq.com>",
+  "description": "MHST2因子配装器 Made by 鎧羅突擊弩賊",
+  "productName": "MHST2因子配装器",
+  "author": "Egg Targaryen",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",

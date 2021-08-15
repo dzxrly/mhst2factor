@@ -141,9 +141,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `Quasar App`,
-        short_name: `Quasar App`,
-        description: `A Quasar Framework app`,
+        name: `MHST2因子配装器`,
+        short_name: `MHST2因子配装器`,
+        description: `MHST2因子配装器`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
