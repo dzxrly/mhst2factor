@@ -311,6 +311,21 @@
       spaced="md"
     />
 
+    <div class="full-width row justify-center items-center">
+      <q-btn
+        class="full-width"
+        icon="search"
+        label="查看宾果列表"
+        @click="openBingoDialog = true"
+        flat
+      ></q-btn>
+    </div>
+
+    <q-separator
+      class="full-width"
+      spaced="md"
+    />
+
     <q-list class="full-width">
       <q-item>
         <q-item-section class="text-bold">因子列表</q-item-section>
@@ -347,6 +362,11 @@
       </q-item>
     </q-list>
 
+    <q-separator
+      class="full-width"
+      spaced="md"
+    />
+
     <q-dialog
       class="gene-list-dialog"
       v-model="openGeneDialog"
@@ -358,6 +378,12 @@
         :selected-gene-index="currentSelectedGene"
         @close-dialog="openGeneDialog = false"
       ></gene-list>
+    </q-dialog>
+    <q-dialog
+      v-model="openBingoDialog"
+      full-width
+    >
+      <bingo :gene="geneGrid"></bingo>
     </q-dialog>
     <q-space/>
     <custom-footer></custom-footer>
@@ -374,10 +400,11 @@ import GeneListItem from 'components/GeneListItem'
 import {exportFile, useQuasar} from 'quasar'
 import html2canvas from 'html2canvas'
 import CustomFooter from 'components/CustomFooter'
+import Bingo from 'components/Bingo'
 
 export default defineComponent({
   name: 'PageIndex',
-  components: {CustomFooter, GeneListItem, TypeIcon, ElementIcon, GeneIcon, GeneList},
+  components: {Bingo, CustomFooter, GeneListItem, TypeIcon, ElementIcon, GeneIcon, GeneList},
   setup() {
     const $q = useQuasar()
     const geneIconSize = ref('16vw')
@@ -389,6 +416,7 @@ export default defineComponent({
       [{}, {}, {}, {}, {}],
     ])
     const openGeneDialog = ref(false)
+    const openBingoDialog = ref(false)
     const currentSelectedGene = ref([1, 1])
 
     function showGeneDialog(geneIndexX, geneIndexY) {
@@ -538,6 +566,7 @@ export default defineComponent({
       openGeneDialog,
       currentSelectedGene,
       geneIconSize,
+      openBingoDialog,
 
       showGeneDialog,
       lineJudge,

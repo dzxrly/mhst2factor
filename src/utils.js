@@ -71,11 +71,20 @@ function fetchEleColor(ele) {
   else return 'grey-6'
 }
 
+function getBingoRatio(bingoNum) {
+  if (bingoNum <= 2) {
+    return bingoNum * 10
+  } else {
+    return 20 + (bingoNum - 2) * 5
+  }
+}
+
 export {
   eleNameTranslate,
   typeNameTranslate,
   getGeneSizeByName,
   getGeneSizeBorderColor,
   fetchTypeColor,
-  fetchEleColor
+  fetchEleColor,
+  getBingoRatio
 }

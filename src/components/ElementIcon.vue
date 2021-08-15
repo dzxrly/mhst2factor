@@ -1,6 +1,7 @@
 <template>
   <div
-    class="ele-icon-wrap shadow-4 relative-position"
+    class="ele-icon-wrap relative-position"
+    :class="{ 'shadow-4' : showShadow, 'border-wrap' : showBorder }"
     v-ripple
   >
     <q-avatar
@@ -31,6 +32,14 @@ export default defineComponent({
     size: {
       type: String,
       default: '8vw'
+    },
+    showBorder: {
+      type: Boolean,
+      default: true
+    },
+    showShadow: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
@@ -61,6 +70,8 @@ export default defineComponent({
   scoped
 >
 .ele-icon-wrap
-  border: solid 2px $primary
   border-radius: 100%
+
+.border-wrap
+  border: solid 2px $primary
 </style>
