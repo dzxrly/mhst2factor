@@ -1,26 +1,29 @@
-# Quasar App (mhst2factor)
+# 怪物猎人物语2：破灭之翼 因子配装器
 
-A Quasar Framework app
+> 数据来源：[小黑盒](https://www.xiaoheihe.cn/home)怪物猎人物语2百科，特别感谢收集整理数据的各位编辑们！
 
-## Install the dependencies
-```bash
-npm install
-```
+![Quasar Shield IO](https://img.shields.io/github/package-json/dependency-version/dzxrly/mhst2factor/quasar?label=Quasar&style=flat-square)
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+![Verison](https://img.shields.io/github/package-json/v/dzxrly/mhst2factor?style=flat-square)
 
-### Lint the files
-```bash
-npm run lint
-```
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-### Build the app for production
-```bash
-quasar build
-```
+## 补充说明
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).
+- 分享保存功能使用html2canvas插件，目前导出时渐变CSS会出现问题，只能等待该插件官方修复。
+
+
+
+## 更新日志
+
+- 2021.08.15 - v1.0.0-beta
+  - 发布了第一个版本
+
+
+
+---
+
+Made By 鎧羅突擊弩賊
+
+HeyBox ID 1310911
+
