@@ -1,5 +1,8 @@
 <template>
-  <div class="type-icon-wrap shadow-4 bg-primary">
+  <div
+    class="type-icon-wrap shadow-4 bg-primary relative-position"
+    v-ripple
+  >
     <q-avatar
       class="avatar"
       :size="size"
@@ -27,7 +30,7 @@ export default defineComponent({
     },
     size: {
       type: String,
-      default: '2rem'
+      default: '8vw'
     }
   },
   setup(props) {

@@ -2,13 +2,13 @@
   <div class="gene-icon-wrap">
     <q-avatar
       :class="{ 'rainbow': gene.id === '虹色基因' }"
-      :style="`border: solid 0.4rem ${getSizeColor(gene.id)};`"
+      :style="`border: solid 2vw ${getSizeColor(gene.id)};`"
       style="box-sizing: content-box;"
       :size="size"
       :color="gene.id !== '虹色基因' ? getEleColor(gene.element) : 'transparent'"
     >
       <img
-        style="height: 2rem; width: 2rem;"
+        style="height: 10vw; width: 10vw;"
         v-if="gene.type !== '无'"
         :src="`${getTypeEngName(gene.type)}.png`"
         :alt="gene.type"
