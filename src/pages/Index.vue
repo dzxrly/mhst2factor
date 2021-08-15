@@ -311,6 +311,42 @@
       spaced="md"
     />
 
+    <q-list class="full-width">
+      <q-item>
+        <q-item-section class="text-bold">因子列表</q-item-section>
+        <q-item-section side>
+          <q-btn
+            icon="share"
+            @click="saveAsImg"
+            round
+            flat
+          ></q-btn>
+        </q-item-section>
+      </q-item>
+      <q-item
+        v-for="(gene, index) in getSkillGeneList"
+        :key="index"
+      >
+        <gene-list-item
+          :gene="gene"
+          :show-opt-btn="false"
+        ></gene-list-item>
+      </q-item>
+      <q-item
+        v-if="getSkillGeneList.length === 0"
+        class="full-width row justify-center items-center"
+      >
+        <div class="column justify-center items-center">
+          <q-icon
+            name="list_alt"
+            size="xl"
+            color="grey-6"
+          ></q-icon>
+          <span class="text-h6 text-bold text-grey-6">还没有选择因子~</span>
+        </div>
+      </q-item>
+    </q-list>
+
     <q-dialog
       class="gene-list-dialog"
       v-model="openGeneDialog"
@@ -323,6 +359,8 @@
         @close-dialog="openGeneDialog = false"
       ></gene-list>
     </q-dialog>
+    <q-space/>
+    <custom-footer></custom-footer>
   </q-page>
 </template>
 
@@ -332,11 +370,16 @@ import GeneList from 'components/GeneList'
 import GeneIcon from 'components/GeneIcon'
 import ElementIcon from 'components/ElementIcon'
 import TypeIcon from 'components/TypeIcon'
+import GeneListItem from 'components/GeneListItem'
+import {exportFile, useQuasar} from 'quasar'
+import html2canvas from 'html2canvas'
+import CustomFooter from 'components/CustomFooter'
 
 export default defineComponent({
   name: 'PageIndex',
-  components: {TypeIcon, ElementIcon, GeneIcon, GeneList},
+  components: {CustomFooter, GeneListItem, TypeIcon, ElementIcon, GeneIcon, GeneList},
   setup() {
+    const $q = useQuasar()
     const geneIconSize = ref('16vw')
     const geneGrid = ref([
       [{}, {}, {}, {}, {}],
@@ -351,6 +394,54 @@ export default defineComponent({
     function showGeneDialog(geneIndexX, geneIndexY) {
       currentSelectedGene.value = [geneIndexX, geneIndexY]
       openGeneDialog.value = true
+    }
+
+    function setGeneTypeOrEle(index, value) {
+      geneGrid.value[index[0]][index[1]] = {
+        value: value
+      }
+    }
+
+    function saveAsImg() {
+      html2canvas(document.querySelector('.index-wrap'), {
+        allowTaint: true,
+        useCORS: true
+      }).then((canvas) => {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const imgStatus = exportFile('我的因子配装.png', blob, {
+              mimeType: 'image/png'
+            })
+            if (imgStatus === true) {
+              $q.notify({
+                type: 'positive',
+                icon: 'save',
+                message: '保存成功',
+                position: 'top'
+              })
+            } else {
+              $q.notify({
+                type: 'negative',
+                icon: 'error',
+                message: '保存失败，请尝试重新保存',
+                position: 'top'
+              })
+            }
+          } else {
+            $q.notify({
+              type: 'negative',
+              icon: 'error',
+              message: '保存失败，请尝试重新保存',
+              position: 'top'
+            })
+          }
+        })
+      }).catch((err) => {
+        $q.notify({
+          type: 'negative',
+          message: `生成图片失败，err: ${err.message}`
+        })
+      })
     }
 
     const lineJudge = computed(() => (index1, index2, index3, judgeType, targetIndex = null) => {
@@ -431,11 +522,16 @@ export default defineComponent({
       }
     })
 
-    function setGeneTypeOrEle(index, value) {
-      geneGrid.value[index[0]][index[1]] = {
-        value: value
+    const getSkillGeneList = computed(() => {
+      const filterGeneList = []
+      for (let i = 1; i < geneGrid.value.length - 1; i++) {
+        for (let j = 1; j < geneGrid.value[i].length - 1; j++) {
+          if (geneGrid.value[i][j] && JSON.stringify(geneGrid.value[i][j]) !== '{}')
+            filterGeneList.push(geneGrid.value[i][j])
+        }
       }
-    }
+      return filterGeneList
+    })
 
     return {
       geneGrid,
@@ -444,7 +540,9 @@ export default defineComponent({
       geneIconSize,
 
       showGeneDialog,
-      lineJudge
+      lineJudge,
+      getSkillGeneList,
+      saveAsImg
     }
   }
 })

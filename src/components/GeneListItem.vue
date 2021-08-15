@@ -45,8 +45,12 @@
             v-close-popup
           ></q-btn>
         </div>
-        <skill-info :gene="gene"></skill-info>
+        <skill-info
+          class="skill-info-wrap"
+          :gene="gene"
+        ></skill-info>
         <q-card-actions
+          v-if="showOptBtn"
           class="dialog-btn-group full-width bg-white"
           align="around"
         >
@@ -84,6 +88,10 @@ export default defineComponent({
   props: {
     gene: {
       type: Object
+    },
+    showOptBtn: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props, context) {
