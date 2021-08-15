@@ -8,6 +8,8 @@
 
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
+网站链接：[MHST2因子配装器](https://egg-targaryen.gitee.io/mhst2factor/#/)
+
 ## 补充说明
 
 - 本站专为移动端开发，故显示比例均为移动端模式，强烈建议在移动端浏览！
