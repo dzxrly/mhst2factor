@@ -1,5 +1,5 @@
 <template>
-  <div class="gene-icon-wrap">
+  <div class="gene-icon-wrap relative-position">
     <q-avatar
       :class="{ 'rainbow': gene.id === '虹色基因' }"
       :style="`border: solid 2vw ${getSizeColor(gene.id)};`"
@@ -14,6 +14,21 @@
         :alt="gene.type"
       >
     </q-avatar>
+    <div class="star-wrap row justify-center items-center no-wrap">
+      <q-icon
+        v-if="gene.star && gene.star >= 1"
+        :class="{ 'q-mr-xs' : gene.star && gene.star >= 2 }"
+        class="star"
+        name="star"
+        color="warning"
+      ></q-icon>
+      <q-icon
+        v-if="gene.star && gene.star >= 2"
+        class="star"
+        name="star"
+        color="warning"
+      ></q-icon>
+    </div>
   </div>
 </template>
 
@@ -67,4 +82,13 @@ export default defineComponent({
 .gene-icon-wrap
   .rainbow
     background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red) !important
+
+  .star-wrap
+    position: absolute
+    bottom: 1vw
+    left: 50%
+    transform: translateX(-50%)
+
+    .star
+      text-shadow: 1px 0 0 white, 0 1px 0 white, -1px 0 0 white, 0 -1px 0 white
 </style>

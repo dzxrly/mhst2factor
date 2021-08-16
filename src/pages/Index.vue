@@ -313,10 +313,17 @@
 
     <div class="full-width row justify-center items-center">
       <q-btn
-        class="full-width"
+        class="col-6 q-pa-sm"
         icon="search"
-        label="查看宾果列表"
+        label="查看宾果"
         @click="openBingoDialog = true"
+        flat
+      ></q-btn>
+      <q-btn
+        class="col-6 q-pa-sm"
+        icon="delete"
+        label="清空因子"
+        @click="showClearConfirm = true"
         flat
       ></q-btn>
     </div>
@@ -330,12 +337,20 @@
       <q-item>
         <q-item-section class="text-bold">因子列表</q-item-section>
         <q-item-section side>
-          <q-btn
-            icon="share"
-            @click="saveAsImg"
-            round
-            flat
-          ></q-btn>
+          <div class="row justify-center items-center no-wrap">
+            <q-btn
+              icon="bug_report"
+              @click="openLink('https://gitee.com/egg-targaryen/mhst2factor')"
+              round
+              flat
+            ></q-btn>
+            <q-btn
+              icon="share"
+              @click="saveAsImg"
+              round
+              flat
+            ></q-btn>
+          </div>
         </q-item-section>
       </q-item>
       <q-item
@@ -385,6 +400,36 @@
     >
       <bingo :gene="geneGrid"></bingo>
     </q-dialog>
+    <q-dialog v-model="showClearConfirm">
+      <q-card>
+        <q-card-section class="row items-center">
+          <q-icon
+            name="error"
+            color="warning"
+            size="xl"
+          ></q-icon>
+          <span class="q-ml-sm">确定要清空因子九宫格？</span>
+        </q-card-section>
+
+        <q-card-actions align="around">
+          <q-btn
+            flat
+            label="确定"
+            icon="check"
+            color="primary"
+            @click="clearGene"
+            v-close-popup
+          />
+          <q-btn
+            flat
+            label="取消"
+            icon="close"
+            color="primary"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
     <q-space/>
     <custom-footer></custom-footer>
   </q-page>
@@ -418,6 +463,11 @@ export default defineComponent({
     const openGeneDialog = ref(false)
     const openBingoDialog = ref(false)
     const currentSelectedGene = ref([1, 1])
+    const showClearConfirm = ref(false)
+
+    function openLink(link) {
+      window.open(link)
+    }
 
     function showGeneDialog(geneIndexX, geneIndexY) {
       currentSelectedGene.value = [geneIndexX, geneIndexY]
@@ -428,6 +478,16 @@ export default defineComponent({
       geneGrid.value[index[0]][index[1]] = {
         value: value
       }
+    }
+
+    function clearGene() {
+      geneGrid.value = [
+        [{}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}],
+        [{}, {}, {}, {}, {}],
+      ]
     }
 
     function saveAsImg() {
@@ -567,11 +627,14 @@ export default defineComponent({
       currentSelectedGene,
       geneIconSize,
       openBingoDialog,
-
-      showGeneDialog,
+      showClearConfirm,
       lineJudge,
       getSkillGeneList,
-      saveAsImg
+
+      showGeneDialog,
+      saveAsImg,
+      clearGene,
+      openLink
     }
   }
 })

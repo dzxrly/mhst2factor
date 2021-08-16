@@ -26,7 +26,7 @@ import {defineComponent, ref} from 'vue'
 export default defineComponent({
   name: 'MainLayout',
   setup() {
-    const version = ref('v1.0.0-beta')
+    const version = ref('v1.0.1')
 
     return {
       version

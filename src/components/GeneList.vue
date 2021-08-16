@@ -1,7 +1,7 @@
 <template>
   <q-card class="gene-list-wrap">
     <div class="close-btn-row bg-white full-width">
-      <div class="row justify-between items-center full-width q-pt-md q-px-md">
+      <div class="row justify-between items-center full-width q-pt-md q-px-sm">
         <span class="text-subtitle2 text-grey-8">共找到{{ geneMap.length }}个因子</span>
         <q-btn
           icon="close"
@@ -13,16 +13,34 @@
       <q-slide-transition>
         <div
           v-if="JSON.stringify(refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]]) !== '{}'"
-          class="row bg-white justify-between items-center full-width q-pa-md"
+          class="column bg-white justify-center items-center full-width"
+          style="border: solid #F2F2F2; border-width: 1px 0"
         >
-          <span>已选中<span class="text-bold">{{ refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id }}</span></span>
-          <q-btn
-            label="清除"
-            icon="delete"
-            color="negative"
-            @click="refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]] = {}"
-            outline
-          ></q-btn>
+          <div class="row justify-start items-center full-width q-pa-sm">
+            <span>已选中<span class="text-bold">{{
+                refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id
+              }}</span></span>
+          </div>
+          <div class="row justify-between items-center full-width no-wrap">
+            <q-select
+              class="col-6 q-pa-sm"
+              v-model="geneStars"
+              :options="geneStarsOptions"
+              label="因子等级"
+              :disable="refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id === '虹色基因'"
+              emit-value
+              map-options
+              filled
+            ></q-select>
+            <q-btn
+              class="col-6 q-pa-sm"
+              label="清除"
+              icon="delete"
+              color="negative"
+              @click="refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]] = {}"
+              flat
+            ></q-btn>
+          </div>
         </div>
       </q-slide-transition>
       <div class="row justify-center items-center full-width q-pb-xs">
@@ -139,6 +157,7 @@ export default defineComponent({
     const reactiveGeneIndex = toRef(props, 'selectedGeneIndex')
     const canNotUseGeneList = ref([])
     const geneMap = ref([])
+    const geneStars = ref(0)
 
     const geneType = ref(null)
     const geneEleType = ref(null)
@@ -173,6 +192,10 @@ export default defineComponent({
       })
     }
 
+    function getGeneStar() {
+      geneStars.value = refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]].star ? refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]].star : 0
+    }
+
     function isGeneUsed(gene) {
       for (let i = 1; i < refGeneGrid.value.length - 1; i++) {
         for (let j = 1; j < refGeneGrid.value[i].length - 1; j++) {
@@ -192,14 +215,24 @@ export default defineComponent({
       context.emit('close-dialog')
     }
 
+    function changeGeneStar() {
+      refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]].star = geneStars.value
+      context.emit('update:gene-grid', refGeneGrid.value)
+    }
+
     initGeneList()
 
     onMounted(() => {
       initGeneMap()
+      getGeneStar()
     })
 
     watch([geneType, geneEleType, geneSize, keyWord], () => {
       initGeneMap(geneType.value, geneEleType.value, geneSize.value, keyWord.value)
+    })
+
+    watch(geneStars, () => {
+      changeGeneStar()
     })
 
     return {
@@ -214,6 +247,19 @@ export default defineComponent({
       keyWord,
       refGeneGrid,
       reactiveGeneIndex,
+      geneStars,
+      geneStarsOptions: [
+        {
+          value: 0,
+          label: '无'
+        }, {
+          value: 1,
+          label: '等级1'
+        }, {
+          value: 2,
+          label: '等级2'
+        }
+      ],
 
       isGeneUsed,
       confirmGene
@@ -227,7 +273,7 @@ export default defineComponent({
   scoped
 >
 .gene-list-wrap
-  height: 85vh
+  height: 90vh
 
   .close-btn-row
     position: sticky
