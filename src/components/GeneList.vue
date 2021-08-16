@@ -72,7 +72,7 @@
         ></q-spinner-pie>
       </div>
       <div
-        v-if="geneMap.length === 0"
+        v-if="geneMap.length === 0 && !loadingGeneList"
         class="full-width q-my-xl column justify-center items-center"
       >
         <q-icon
