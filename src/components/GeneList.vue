@@ -210,7 +210,7 @@ export default defineComponent({
     }
 
     function confirmGene(gene) {
-      refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]] = gene
+      refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]] = { ...gene }
       context.emit('update:gene-grid', refGeneGrid.value)
       context.emit('close-dialog')
     }
