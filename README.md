@@ -2,7 +2,7 @@
 
 > 数据来源：[小黑盒](https://www.xiaoheihe.cn/home)怪物猎人物语2百科，特别感谢收集整理数据的各位编辑们！
 
-![Quasar Shield IO](https://img.shields.io/github/package-json/dependency-version/dzxrly/mhst2factor/quasar?label=Quasar&style=flat-square) ![Verison](https://img.shields.io/github/package-json/v/dzxrly/mhst2factor?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Quasar Shield IO](https://img.shields.io/github/package-json/dependency-version/dzxrly/mhst2factor/quasar?label=quasar&style=flat-square) ![Verison](https://img.shields.io/github/package-json/v/dzxrly/mhst2factor?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 网站链接：[MHST2因子配装器](https://egg-targaryen.gitee.io/mhst2factor/#/)
 
