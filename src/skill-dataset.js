@@ -1,4 +1,4 @@
-import skillJSON from 'src/skill.json'
+import skillJSON from "src/skill.json";
 
 /**
  * Get Skill Info
@@ -7,10 +7,8 @@ import skillJSON from 'src/skill.json'
  */
 function getSkillByGeneName(name) {
   return skillJSON.filter((val) => {
-    return val.out === name
-  })
+    return val.out === name;
+  });
 }
 
-export {
-  getSkillByGeneName
-}
+export { getSkillByGeneName };

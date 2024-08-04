@@ -6,24 +6,18 @@
   >
     <div class="row justify-start items-center">
       <span class="text-h6 text-primary text-bold">{{ gene.id }}</span>
-      <q-chip
-        :color="getTypeColor(gene.type)"
-        outline
-      >{{ gene.type }}
-      </q-chip>
-      <q-chip
-        :color="getEleColor(gene.element)"
-        text-color="white"
-      >{{ gene.element }}
+      <q-chip :color="getTypeColor(gene.type)" outline>{{ gene.type }} </q-chip>
+      <q-chip :color="getEleColor(gene.element)" text-color="white"
+        >{{ gene.element }}
       </q-chip>
     </div>
     <div class="gene-info row justify-start items-center full-width no-wrap">
       <gene-icon :gene="gene"></gene-icon>
       <div class="col-8 column justify-start items-start q-pl-sm">
         <div class="col row justify-start items-center">
-          <span class="text-subtitle1 text-primary text-bold">{{ gene.skill }} | 绊值: {{
-              gene.cost ? gene.cost : 0
-            }}</span>
+          <span class="text-subtitle1 text-primary text-bold"
+            >{{ gene.skill }} | 绊值: {{ gene.cost ? gene.cost : 0 }}</span
+          >
         </div>
         <div class="col row justify-start items-center">
           <span class="text-body1 text-primary">{{ gene.skill_desc }}</span>
@@ -31,24 +25,12 @@
       </div>
     </div>
 
-    <q-dialog
-      v-model="showInfoDialog"
-      class="skill-dialog"
-      full-width
-    >
+    <q-dialog v-model="showInfoDialog" class="skill-dialog" full-width>
       <q-card class="full-width">
         <div class="full-width row justify-end items-center">
-          <q-btn
-            v-close-popup
-            flat
-            icon="close"
-            round
-          ></q-btn>
+          <q-btn v-close-popup flat icon="close" round></q-btn>
         </div>
-        <skill-info
-          :gene="gene"
-          class="skill-info-wrap"
-        ></skill-info>
+        <skill-info :gene="gene" class="skill-info-wrap"></skill-info>
         <q-card-actions
           v-if="showOptBtn"
           align="around"
@@ -76,38 +58,38 @@
 </template>
 
 <script>
-import {defineComponent, ref} from 'vue'
-import SkillInfo from 'src/components/SkillInfo.vue'
-import GeneIcon from 'src/components/GeneIcon.vue'
-import {fetchEleColor, fetchTypeColor} from 'src/utils'
+import { defineComponent, ref } from "vue";
+import SkillInfo from "src/components/SkillInfo.vue";
+import GeneIcon from "src/components/GeneIcon.vue";
+import { fetchEleColor, fetchTypeColor } from "src/utils";
 
 export default defineComponent({
-  name: 'GeneListItem',
-  components: {GeneIcon, SkillInfo},
-  emits: ['confirm-gene'],
+  name: "GeneListItem",
+  components: { GeneIcon, SkillInfo },
+  emits: ["confirm-gene"],
   props: {
     gene: {
-      type: Object
+      type: Object,
     },
     showOptBtn: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   setup(props, context) {
-    const showInfoDialog = ref(false)
+    const showInfoDialog = ref(false);
 
     function getTypeColor(type) {
-      return fetchTypeColor(type)
+      return fetchTypeColor(type);
     }
 
     function getEleColor(ele) {
-      return fetchEleColor(ele)
+      return fetchEleColor(ele);
     }
 
     function confirmGene() {
-      context.emit('confirm-gene', props.gene)
-      showInfoDialog.value = false
+      context.emit("confirm-gene", props.gene);
+      showInfoDialog.value = false;
     }
 
     return {
@@ -115,16 +97,13 @@ export default defineComponent({
 
       getTypeColor,
       getEleColor,
-      confirmGene
-    }
-  }
-})
+      confirmGene,
+    };
+  },
+});
 </script>
 
-<style
-  lang="sass"
-  scoped
->
+<style lang="sass" scoped>
 .skill-dialog
   height: 80vh
 

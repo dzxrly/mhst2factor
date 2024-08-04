@@ -1,49 +1,37 @@
 <template>
   <q-page class="index-wrap full-width column justify-start items-center">
     <div class="gene-grid q-my-md relative-position">
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([1, 1], [2, 2], [3, 3], 'Element', [0, 0]).show"
           :ele="lineJudge([1, 1], [2, 2], [3, 3], 'Element').element"
         ></element-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([1, 1], [2, 1], [3, 1], 'Element', [0, 1]).show"
           :ele="lineJudge([1, 1], [2, 1], [3, 1], 'Element').element"
         ></element-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([1, 2], [2, 2], [3, 2], 'Element', [0, 2]).show"
           :ele="lineJudge([1, 2], [2, 2], [3, 2], 'Element').element"
         ></element-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([1, 3], [2, 3], [3, 3], 'Element', [0, 3]).show"
           :ele="lineJudge([1, 3], [2, 3], [3, 3], 'Element').element"
         ></element-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([1, 3], [2, 2], [3, 1], 'Type', [0, 4]).show"
           :type="lineJudge([1, 3], [2, 2], [3, 1], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([1, 1], [1, 2], [1, 3], 'Element', [1, 0]).show"
           :ele="lineJudge([1, 1], [1, 2], [1, 3], 'Element').element"
@@ -54,7 +42,9 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(1, 1)"
       >
-        <span v-if="geneGrid[1][1] && JSON.stringify(geneGrid[1][1]) === '{}'">空位</span>
+        <span v-if="geneGrid[1][1] && JSON.stringify(geneGrid[1][1]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[1][1]"
@@ -66,7 +56,9 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(1, 2)"
       >
-        <span v-if="geneGrid[1][2] && JSON.stringify(geneGrid[1][2]) === '{}'">空位</span>
+        <span v-if="geneGrid[1][2] && JSON.stringify(geneGrid[1][2]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[1][2]"
@@ -78,24 +70,22 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(1, 3)"
       >
-        <span v-if="geneGrid[1][3] && JSON.stringify(geneGrid[1][3]) === '{}'">空位</span>
+        <span v-if="geneGrid[1][3] && JSON.stringify(geneGrid[1][3]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[1][3]"
           :size="geneIconSize"
         ></gene-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([1, 1], [1, 2], [1, 3], 'Type', [1, 4]).show"
           :type="lineJudge([1, 1], [1, 2], [1, 3], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([2, 1], [2, 2], [2, 3], 'Element', [2, 0]).show"
           :ele="lineJudge([2, 1], [2, 2], [2, 3], 'Element').element"
@@ -106,7 +96,9 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(2, 1)"
       >
-        <span v-if="geneGrid[2][1] && JSON.stringify(geneGrid[2][1]) === '{}'">空位</span>
+        <span v-if="geneGrid[2][1] && JSON.stringify(geneGrid[2][1]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[2][1]"
@@ -118,7 +110,9 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(2, 2)"
       >
-        <span v-if="geneGrid[2][2] && JSON.stringify(geneGrid[2][2]) === '{}'">空位</span>
+        <span v-if="geneGrid[2][2] && JSON.stringify(geneGrid[2][2]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[2][2]"
@@ -130,24 +124,22 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(2, 3)"
       >
-        <span v-if="geneGrid[2][3] && JSON.stringify(geneGrid[2][3]) === '{}'">空位</span>
+        <span v-if="geneGrid[2][3] && JSON.stringify(geneGrid[2][3]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[2][3]"
           :size="geneIconSize"
         ></gene-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([2, 1], [2, 2], [2, 3], 'Type', [2, 4]).show"
           :type="lineJudge([2, 1], [2, 2], [2, 3], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([3, 1], [3, 2], [3, 3], 'Element', [3, 0]).show"
           :ele="lineJudge([3, 1], [3, 2], [3, 3], 'Element').element"
@@ -158,7 +150,9 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(3, 1)"
       >
-        <span v-if="geneGrid[3][1] && JSON.stringify(geneGrid[3][1]) === '{}'">空位</span>
+        <span v-if="geneGrid[3][1] && JSON.stringify(geneGrid[3][1]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[3][1]"
@@ -170,7 +164,9 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(3, 2)"
       >
-        <span v-if="geneGrid[3][2] && JSON.stringify(geneGrid[3][2]) === '{}'">空位</span>
+        <span v-if="geneGrid[3][2] && JSON.stringify(geneGrid[3][2]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[3][2]"
@@ -182,56 +178,46 @@
         class="gene-block shadow-4 text-primary relative-position overflow-hidden"
         @click="showGeneDialog(3, 3)"
       >
-        <span v-if="geneGrid[3][3] && JSON.stringify(geneGrid[3][3]) === '{}'">空位</span>
+        <span v-if="geneGrid[3][3] && JSON.stringify(geneGrid[3][3]) === '{}'"
+          >空位</span
+        >
         <gene-icon
           v-else
           :gene="geneGrid[3][3]"
           :size="geneIconSize"
         ></gene-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([3, 1], [3, 2], [3, 3], 'Type', [3, 4]).show"
           :type="lineJudge([3, 1], [3, 2], [3, 3], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <element-icon
           v-if="lineJudge([3, 1], [2, 2], [1, 3], 'Element', [4, 0]).show"
           :ele="lineJudge([3, 1], [2, 2], [1, 3], 'Element').element"
         ></element-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([1, 1], [2, 1], [3, 1], 'Type', [4, 1]).show"
           :type="lineJudge([1, 1], [2, 1], [3, 1], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([1, 2], [2, 2], [3, 2], 'Type', [4, 2]).show"
           :type="lineJudge([1, 2], [2, 2], [3, 2], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([1, 3], [2, 3], [3, 3], 'Type', [4, 3]).show"
           :type="lineJudge([1, 3], [2, 3], [3, 3], 'Type').type"
         ></type-icon>
       </div>
-      <div
-        class="gene-item relative-position"
-      >
+      <div class="gene-item relative-position">
         <type-icon
           v-if="lineJudge([1, 1], [2, 2], [3, 3], 'Type', [4, 4]).show"
           :type="lineJudge([1, 1], [2, 2], [3, 3], 'Type').type"
@@ -239,27 +225,27 @@
       </div>
 
       <div
-        v-if="lineJudge([1, 1], [1 ,2], [1, 3], 'Element').show"
+        v-if="lineJudge([1, 1], [1, 2], [1, 3], 'Element').show"
         class="gene-row gene-row-1"
       ></div>
       <div
-        v-if="lineJudge([2, 1], [2 ,2], [2, 3], 'Element').show"
+        v-if="lineJudge([2, 1], [2, 2], [2, 3], 'Element').show"
         class="gene-row gene-row-2"
       ></div>
       <div
-        v-if="lineJudge([3, 1], [3 ,2], [3, 3], 'Element').show"
+        v-if="lineJudge([3, 1], [3, 2], [3, 3], 'Element').show"
         class="gene-row gene-row-3"
       ></div>
       <div
-        v-if="lineJudge([1, 1], [1 ,2], [1, 3], 'Type').show"
+        v-if="lineJudge([1, 1], [1, 2], [1, 3], 'Type').show"
         class="gene-row gene-row-4"
       ></div>
       <div
-        v-if="lineJudge([2, 1], [2 ,2], [2, 3], 'Type').show"
+        v-if="lineJudge([2, 1], [2, 2], [2, 3], 'Type').show"
         class="gene-row gene-row-5"
       ></div>
       <div
-        v-if="lineJudge([3, 1], [3 ,2], [3, 3], 'Type').show"
+        v-if="lineJudge([3, 1], [3, 2], [3, 3], 'Type').show"
         class="gene-row gene-row-6"
       ></div>
 
@@ -306,10 +292,7 @@
       ></div>
     </div>
 
-    <q-separator
-      class="full-width"
-      spaced="md"
-    />
+    <q-separator class="full-width" spaced="md" />
 
     <div class="full-width row justify-center items-center">
       <q-btn
@@ -328,10 +311,7 @@
       ></q-btn>
     </div>
 
-    <q-separator
-      class="full-width"
-      spaced="md"
-    />
+    <q-separator class="full-width" spaced="md" />
 
     <q-list class="full-width">
       <q-item>
@@ -344,43 +324,25 @@
               round
               @click="openLink('https://gitee.com/egg-targaryen/mhst2factor')"
             ></q-btn>
-            <q-btn
-              flat
-              icon="share"
-              round
-              @click="saveAsImg"
-            ></q-btn>
+            <q-btn flat icon="share" round @click="saveAsImg"></q-btn>
           </div>
         </q-item-section>
       </q-item>
-      <q-item
-        v-for="(gene, index) in getSkillGeneList"
-        :key="index"
-      >
-        <gene-list-item
-          :gene="gene"
-          :show-opt-btn="false"
-        ></gene-list-item>
+      <q-item v-for="(gene, index) in getSkillGeneList" :key="index">
+        <gene-list-item :gene="gene" :show-opt-btn="false"></gene-list-item>
       </q-item>
       <q-item
         v-if="getSkillGeneList.length === 0"
         class="full-width row justify-center items-center"
       >
         <div class="column justify-center items-center">
-          <q-icon
-            color="grey-6"
-            name="list_alt"
-            size="xl"
-          ></q-icon>
+          <q-icon color="grey-6" name="list_alt" size="xl"></q-icon>
           <span class="text-h6 text-bold text-grey-6">还没有选择因子~</span>
         </div>
       </q-item>
     </q-list>
 
-    <q-separator
-      class="full-width"
-      spaced="md"
-    />
+    <q-separator class="full-width" spaced="md" />
 
     <q-dialog
       v-model="openGeneDialog"
@@ -394,20 +356,13 @@
         @close-dialog="openGeneDialog = false"
       ></gene-list>
     </q-dialog>
-    <q-dialog
-      v-model="openBingoDialog"
-      full-width
-    >
+    <q-dialog v-model="openBingoDialog" full-width>
       <bingo-module :gene="geneGrid"></bingo-module>
     </q-dialog>
     <q-dialog v-model="showClearConfirm">
       <q-card>
         <q-card-section class="row items-center">
-          <q-icon
-            color="warning"
-            name="error"
-            size="xl"
-          ></q-icon>
+          <q-icon color="warning" name="error" size="xl"></q-icon>
           <span class="q-ml-sm">确定要清空因子九宫格？</span>
         </q-card-section>
 
@@ -420,64 +375,66 @@
             label="确定"
             @click="clearGene"
           />
-          <q-btn
-            v-close-popup
-            color="primary"
-            flat
-            icon="close"
-            label="取消"
-          />
+          <q-btn v-close-popup color="primary" flat icon="close" label="取消" />
         </q-card-actions>
       </q-card>
     </q-dialog>
-    <q-space/>
+    <q-space />
     <custom-footer></custom-footer>
   </q-page>
 </template>
 
 <script>
-import {computed, defineComponent, ref} from 'vue'
-import GeneList from 'src/components/GeneList.vue'
-import GeneIcon from 'src/components/GeneIcon.vue'
-import ElementIcon from 'src/components/ElementIcon.vue'
-import TypeIcon from 'src/components/TypeIcon.vue'
-import GeneListItem from 'src/components/GeneListItem.vue'
-import {exportFile, useQuasar} from 'quasar'
-import html2canvas from 'html2canvas'
-import CustomFooter from 'src/components/CustomFooter.vue'
-import BingoModule from 'src/components/BingoModule.vue'
+import { computed, defineComponent, ref } from "vue";
+import GeneList from "src/components/GeneList.vue";
+import GeneIcon from "src/components/GeneIcon.vue";
+import ElementIcon from "src/components/ElementIcon.vue";
+import TypeIcon from "src/components/TypeIcon.vue";
+import GeneListItem from "src/components/GeneListItem.vue";
+import { exportFile, useQuasar } from "quasar";
+import html2canvas from "html2canvas";
+import CustomFooter from "src/components/CustomFooter.vue";
+import BingoModule from "src/components/BingoModule.vue";
 
 export default defineComponent({
-  name: 'IndexPage',
-  components: {BingoModule, CustomFooter, GeneListItem, TypeIcon, ElementIcon, GeneIcon, GeneList},
+  name: "IndexPage",
+  components: {
+    BingoModule,
+    CustomFooter,
+    GeneListItem,
+    TypeIcon,
+    ElementIcon,
+    GeneIcon,
+    GeneList,
+  },
   setup() {
-    const $q = useQuasar()
-    const geneIconSize = ref('16vw')
+    const $q = useQuasar();
+    const geneIconSize = ref("16vw");
     const geneGrid = ref([
       [{}, {}, {}, {}, {}],
       [{}, {}, {}, {}, {}],
       [{}, {}, {}, {}, {}],
       [{}, {}, {}, {}, {}],
       [{}, {}, {}, {}, {}],
-    ])
-    const openGeneDialog = ref(false)
-    const openBingoDialog = ref(false)
-    const currentSelectedGene = ref([1, 1])
-    const showClearConfirm = ref(false)
+    ]);
+    const openGeneDialog = ref(false);
+    const openBingoDialog = ref(false);
+    const currentSelectedGene = ref([1, 1]);
+    const showClearConfirm = ref(false);
 
     function openLink(link) {
-      window.open(link)
+      window.open(link);
     }
 
     function showGeneDialog(geneIndexX, geneIndexY) {
-      currentSelectedGene.value = [geneIndexX, geneIndexY]
-      openGeneDialog.value = true
+      currentSelectedGene.value = [geneIndexX, geneIndexY];
+      openGeneDialog.value = true;
     }
 
     function setGeneTypeOrEle(index, value) {
       geneGrid.value[index[0]][index[1]] = {
-        value: value
-      }
+        value: value,
+      };
     }
 
     function clearGene() {
@@ -487,139 +444,216 @@ export default defineComponent({
         [{}, {}, {}, {}, {}],
         [{}, {}, {}, {}, {}],
         [{}, {}, {}, {}, {}],
-      ]
+      ];
     }
 
     function saveAsImg() {
-      html2canvas(document.querySelector('.index-wrap'), {
+      html2canvas(document.querySelector(".index-wrap"), {
         allowTaint: true,
-        useCORS: true
-      }).then((canvas) => {
-        canvas.toBlob((blob) => {
-          if (blob) {
-            const imgStatus = exportFile('我的因子配装.png', blob, {
-              mimeType: 'image/png'
-            })
-            if (imgStatus === true) {
-              $q.notify({
-                type: 'positive',
-                icon: 'save',
-                message: '保存成功',
-                position: 'top'
-              })
+        useCORS: true,
+      })
+        .then((canvas) => {
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const imgStatus = exportFile("我的因子配装.png", blob, {
+                mimeType: "image/png",
+              });
+              if (imgStatus === true) {
+                $q.notify({
+                  type: "positive",
+                  icon: "save",
+                  message: "保存成功",
+                  position: "top",
+                });
+              } else {
+                $q.notify({
+                  type: "negative",
+                  icon: "error",
+                  message: "保存失败，请尝试重新保存",
+                  position: "top",
+                });
+              }
             } else {
               $q.notify({
-                type: 'negative',
-                icon: 'error',
-                message: '保存失败，请尝试重新保存',
-                position: 'top'
-              })
+                type: "negative",
+                icon: "error",
+                message: "保存失败，请尝试重新保存",
+                position: "top",
+              });
             }
-          } else {
-            $q.notify({
-              type: 'negative',
-              icon: 'error',
-              message: '保存失败，请尝试重新保存',
-              position: 'top'
-            })
-          }
+          });
         })
-      }).catch((err) => {
-        $q.notify({
-          type: 'negative',
-          message: `生成图片失败，err: ${err.message}`
-        })
-      })
+        .catch((err) => {
+          $q.notify({
+            type: "negative",
+            message: `生成图片失败，err: ${err.message}`,
+          });
+        });
     }
 
-    const lineJudge = computed(() => (index1, index2, index3, judgeType, targetIndex = null) => {
-      if (judgeType === 'Type') {
-        if (!geneGrid.value[index1[0]][index1[1]].type || !geneGrid.value[index3[0]][index3[1]].type || !geneGrid.value[index2[0]][index2[1]].type) {
-          return {
-            show: false
-          }
-        } else if (geneGrid.value[index1[0]][index1[1]].type === geneGrid.value[index2[0]][index2[1]].type &&
-          geneGrid.value[index3[0]][index3[1]].type === geneGrid.value[index2[0]][index2[1]].type) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index1[0]][index1[1]].type)
-          return {
-            show: true,
-            type: geneGrid.value[index1[0]][index1[1]].type
-          }
-        } else if (geneGrid.value[index1[0]][index1[1]].type === '虹色' &&
-          geneGrid.value[index3[0]][index3[1]].type === geneGrid.value[index2[0]][index2[1]].type) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index2[0]][index2[1]].type)
-          return {
-            show: true,
-            type: geneGrid.value[index2[0]][index2[1]].type
-          }
-        } else if (geneGrid.value[index2[0]][index2[1]].type === '虹色' &&
-          geneGrid.value[index3[0]][index3[1]].type === geneGrid.value[index1[0]][index1[1]].type) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index1[0]][index1[1]].type)
-          return {
-            show: true,
-            type: geneGrid.value[index1[0]][index1[1]].type
-          }
-        } else if (geneGrid.value[index3[0]][index3[1]].type === '虹色' &&
-          geneGrid.value[index2[0]][index2[1]].type === geneGrid.value[index1[0]][index1[1]].type) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index2[0]][index2[1]].type)
-          return {
-            show: true,
-            type: geneGrid.value[index2[0]][index2[1]].type
-          }
-        } else return {
-          show: false
+    const lineJudge = computed(
+      () =>
+        (index1, index2, index3, judgeType, targetIndex = null) => {
+          if (judgeType === "Type") {
+            if (
+              !geneGrid.value[index1[0]][index1[1]].type ||
+              !geneGrid.value[index3[0]][index3[1]].type ||
+              !geneGrid.value[index2[0]][index2[1]].type
+            ) {
+              return {
+                show: false,
+              };
+            } else if (
+              geneGrid.value[index1[0]][index1[1]].type ===
+                geneGrid.value[index2[0]][index2[1]].type &&
+              geneGrid.value[index3[0]][index3[1]].type ===
+                geneGrid.value[index2[0]][index2[1]].type
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index1[0]][index1[1]].type
+                );
+              return {
+                show: true,
+                type: geneGrid.value[index1[0]][index1[1]].type,
+              };
+            } else if (
+              geneGrid.value[index1[0]][index1[1]].type === "虹色" &&
+              geneGrid.value[index3[0]][index3[1]].type ===
+                geneGrid.value[index2[0]][index2[1]].type
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index2[0]][index2[1]].type
+                );
+              return {
+                show: true,
+                type: geneGrid.value[index2[0]][index2[1]].type,
+              };
+            } else if (
+              geneGrid.value[index2[0]][index2[1]].type === "虹色" &&
+              geneGrid.value[index3[0]][index3[1]].type ===
+                geneGrid.value[index1[0]][index1[1]].type
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index1[0]][index1[1]].type
+                );
+              return {
+                show: true,
+                type: geneGrid.value[index1[0]][index1[1]].type,
+              };
+            } else if (
+              geneGrid.value[index3[0]][index3[1]].type === "虹色" &&
+              geneGrid.value[index2[0]][index2[1]].type ===
+                geneGrid.value[index1[0]][index1[1]].type
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index2[0]][index2[1]].type
+                );
+              return {
+                show: true,
+                type: geneGrid.value[index2[0]][index2[1]].type,
+              };
+            } else
+              return {
+                show: false,
+              };
+          } else if (judgeType === "Element") {
+            if (
+              !geneGrid.value[index1[0]][index1[1]].element ||
+              !geneGrid.value[index3[0]][index3[1]].element ||
+              !geneGrid.value[index2[0]][index2[1]].element
+            ) {
+              return {
+                show: false,
+              };
+            } else if (
+              geneGrid.value[index1[0]][index1[1]].element ===
+                geneGrid.value[index2[0]][index2[1]].element &&
+              geneGrid.value[index3[0]][index3[1]].element ===
+                geneGrid.value[index2[0]][index2[1]].element
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index1[0]][index1[1]].element
+                );
+              return {
+                show: true,
+                element: geneGrid.value[index1[0]][index1[1]].element,
+              };
+            } else if (
+              geneGrid.value[index1[0]][index1[1]].element === "虹色" &&
+              geneGrid.value[index3[0]][index3[1]].element ===
+                geneGrid.value[index2[0]][index2[1]].element
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index2[0]][index2[1]].element
+                );
+              return {
+                show: true,
+                element: geneGrid.value[index2[0]][index2[1]].element,
+              };
+            } else if (
+              geneGrid.value[index2[0]][index2[1]].element === "虹色" &&
+              geneGrid.value[index3[0]][index3[1]].element ===
+                geneGrid.value[index1[0]][index1[1]].element
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index1[0]][index1[1]].element
+                );
+              return {
+                show: true,
+                element: geneGrid.value[index1[0]][index1[1]].element,
+              };
+            } else if (
+              geneGrid.value[index3[0]][index3[1]].element === "虹色" &&
+              geneGrid.value[index2[0]][index2[1]].element ===
+                geneGrid.value[index1[0]][index1[1]].element
+            ) {
+              if (targetIndex)
+                setGeneTypeOrEle(
+                  targetIndex,
+                  geneGrid.value[index2[0]][index2[1]].element
+                );
+              return {
+                show: true,
+                element: geneGrid.value[index2[0]][index2[1]].element,
+              };
+            } else
+              return {
+                show: false,
+              };
+          } else
+            return {
+              show: false,
+            };
         }
-      } else if (judgeType === 'Element') {
-        if (!geneGrid.value[index1[0]][index1[1]].element || !geneGrid.value[index3[0]][index3[1]].element || !geneGrid.value[index2[0]][index2[1]].element) {
-          return {
-            show: false
-          }
-        } else if (geneGrid.value[index1[0]][index1[1]].element === geneGrid.value[index2[0]][index2[1]].element &&
-          geneGrid.value[index3[0]][index3[1]].element === geneGrid.value[index2[0]][index2[1]].element) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index1[0]][index1[1]].element)
-          return {
-            show: true,
-            element: geneGrid.value[index1[0]][index1[1]].element
-          }
-        } else if (geneGrid.value[index1[0]][index1[1]].element === '虹色' &&
-          geneGrid.value[index3[0]][index3[1]].element === geneGrid.value[index2[0]][index2[1]].element) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index2[0]][index2[1]].element)
-          return {
-            show: true,
-            element: geneGrid.value[index2[0]][index2[1]].element
-          }
-        } else if (geneGrid.value[index2[0]][index2[1]].element === '虹色' &&
-          geneGrid.value[index3[0]][index3[1]].element === geneGrid.value[index1[0]][index1[1]].element) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index1[0]][index1[1]].element)
-          return {
-            show: true,
-            element: geneGrid.value[index1[0]][index1[1]].element
-          }
-        } else if (geneGrid.value[index3[0]][index3[1]].element === '虹色' &&
-          geneGrid.value[index2[0]][index2[1]].element === geneGrid.value[index1[0]][index1[1]].element) {
-          if (targetIndex) setGeneTypeOrEle(targetIndex, geneGrid.value[index2[0]][index2[1]].element)
-          return {
-            show: true,
-            element: geneGrid.value[index2[0]][index2[1]].element
-          }
-        } else return {
-          show: false
-        }
-      } else return {
-        show: false
-      }
-    })
+    );
 
     const getSkillGeneList = computed(() => {
-      const filterGeneList = []
+      const filterGeneList = [];
       for (let i = 1; i < geneGrid.value.length - 1; i++) {
         for (let j = 1; j < geneGrid.value[i].length - 1; j++) {
-          if (geneGrid.value[i][j] && JSON.stringify(geneGrid.value[i][j]) !== '{}')
-            filterGeneList.push(geneGrid.value[i][j])
+          if (
+            geneGrid.value[i][j] &&
+            JSON.stringify(geneGrid.value[i][j]) !== "{}"
+          )
+            filterGeneList.push(geneGrid.value[i][j]);
         }
       }
-      return filterGeneList
-    })
+      return filterGeneList;
+    });
 
     return {
       geneGrid,
@@ -634,16 +668,13 @@ export default defineComponent({
       showGeneDialog,
       saveAsImg,
       clearGene,
-      openLink
-    }
-  }
-})
+      openLink,
+    };
+  },
+});
 </script>
 
-<style
-  lang="sass"
-  scoped
->
+<style lang="sass" scoped>
 .index-wrap
   --line-scale: 6
   --gene-block-size: 16vw

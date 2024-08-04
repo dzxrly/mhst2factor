@@ -1,19 +1,19 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 <script>
-import {defineComponent, onMounted} from 'vue'
-import {useQuasar} from 'quasar'
+import { defineComponent, onMounted } from "vue";
+import { useQuasar } from "quasar";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   setup() {
-    const $q = useQuasar()
+    const $q = useQuasar();
     onMounted(() => {
-      console.info(`Quasar Version: ${$q.version}`)
-    })
-  }
-})
+      console.info(`Quasar Version: ${$q.version}`);
+    });
+  },
+});
 </script>
 
 <style lang="sass">

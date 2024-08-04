@@ -1,74 +1,64 @@
 <template>
   <div
     v-ripple
-    :class="{ 'shadow-4' : showShadow, 'border-wrap' : showBorder }"
+    :class="{ 'shadow-4': showShadow, 'border-wrap': showBorder }"
     class="type-icon-wrap bg-primary relative-position"
   >
-    <q-avatar
-      :size="size"
-      class="avatar"
-      color="primary"
-    >
-      <img
-        :alt="type"
-        :src="src"
-      >
+    <q-avatar :size="size" class="avatar" color="primary">
+      <img :alt="type" :src="src" />
     </q-avatar>
   </div>
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, toRef} from 'vue'
-import {typeNameTranslate} from 'src/utils'
+import { defineComponent, onMounted, ref, toRef } from "vue";
+import { typeNameTranslate } from "src/utils";
 
 export default defineComponent({
-  name: 'TypeIcon',
+  name: "TypeIcon",
   props: {
     type: {
       type: String,
       required: true,
-      default: 'power'
+      default: "power",
     },
     size: {
       type: String,
-      default: '8vw'
+      default: "8vw",
     },
     showBorder: {
       type: Boolean,
-      default: true
+      default: true,
     },
     showShadow: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   setup(props) {
-    const reactiveType = toRef(props, 'type')
-    const src = ref('#')
+    const reactiveType = toRef(props, "type");
+    const src = ref("#");
 
     function getEngTypeName(type) {
-      return typeNameTranslate(type)
+      return typeNameTranslate(type);
     }
 
     function getPath() {
-      src.value = `${getEngTypeName(reactiveType.value)}.png`
+      src.value = `${getEngTypeName(reactiveType.value)}.png`;
     }
 
     onMounted(() => {
-      getPath()
-    })
+      getPath();
+    });
 
     return {
-      src
-    }
-  }
-})
+      src,
+    };
+  },
+});
 </script>
 
-<style
-  lang="sass"
-  scoped
->
+<style lang="sass" scoped>
 .type-icon-wrap
   border-radius: 100%
 

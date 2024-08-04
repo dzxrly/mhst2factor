@@ -2,29 +2,35 @@
   <q-card class="gene-list-wrap">
     <div class="close-btn-row bg-white full-width">
       <div class="row justify-between items-center full-width q-pt-md q-px-sm">
-        <span class="text-subtitle2 text-grey-8">共找到{{ geneMap.length }}个因子</span>
-        <q-btn
-          v-close-popup
-          flat
-          icon="close"
-          round
-        ></q-btn>
+        <span class="text-subtitle2 text-grey-8"
+          >共找到{{ geneMap.length }}个因子</span
+        >
+        <q-btn v-close-popup flat icon="close" round></q-btn>
       </div>
       <q-slide-transition>
         <div
-          v-if="JSON.stringify(refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]]) !== '{}'"
+          v-if="
+            JSON.stringify(
+              refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]]
+            ) !== '{}'
+          "
           class="column bg-white justify-center items-center full-width"
-          style="border: solid #F2F2F2; border-width: 1px 0"
+          style="border: solid #f2f2f2; border-width: 1px 0"
         >
           <div class="row justify-start items-center full-width q-pa-sm">
-            <span>已选中<span class="text-bold">{{
+            <span
+              >已选中<span class="text-bold">{{
                 refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id
-              }}</span></span>
+              }}</span></span
+            >
           </div>
           <div class="row justify-between items-center full-width no-wrap">
             <q-select
               v-model="geneStars"
-              :disable="refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id === '虹色基因'"
+              :disable="
+                refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]].id ===
+                '虹色基因'
+              "
               :options="geneStarsOptions"
               class="col-6 q-pa-sm"
               emit-value
@@ -38,7 +44,9 @@
               flat
               icon="delete"
               label="清除"
-              @click="refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]] = {}"
+              @click="
+                refGeneGrid[reactiveGeneIndex[0]][reactiveGeneIndex[1]] = {}
+              "
             ></q-btn>
           </div>
         </div>
@@ -84,26 +92,16 @@
         v-if="loadingGeneList"
         class="row justify-center items-center full-width q-my-xl"
       >
-        <q-spinner-pie
-          color="primary"
-          size="20vw"
-        ></q-spinner-pie>
+        <q-spinner-pie color="primary" size="20vw"></q-spinner-pie>
       </div>
       <div
         v-if="geneMap.length === 0 && !loadingGeneList"
         class="full-width q-my-xl column justify-center items-center"
       >
-        <q-icon
-          color="grey-6"
-          name="search_off"
-          size="20vw"
-        ></q-icon>
+        <q-icon color="grey-6" name="search_off" size="20vw"></q-icon>
         <span class="text-h6 text-bold text-grey-6">什么也没找到 :P</span>
       </div>
-      <div
-        v-if="!loadingGeneList"
-        class="full-width"
-      >
+      <div v-if="!loadingGeneList" class="full-width">
         <q-virtual-scroll
           :items="geneMap"
           :items-size="10"
@@ -111,10 +109,7 @@
           style="max-height: 80vh"
         >
           <template v-slot="{ item, index }">
-            <q-item
-              :key="index"
-              :class="{'disabled-item' : isGeneUsed(item)}"
-            >
+            <q-item :key="index" :class="{ 'disabled-item': isGeneUsed(item) }">
               <q-item-section>
                 <gene-list-item
                   :gene="item"
@@ -130,120 +125,151 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, toRef, watch} from 'vue'
-import GeneListItem from 'src/components/GeneListItem.vue'
-import {useQuasar} from 'quasar'
+import { defineComponent, onMounted, ref, toRef, watch } from "vue";
+import GeneListItem from "src/components/GeneListItem.vue";
+import { useQuasar } from "quasar";
 
 export default defineComponent({
-  name: 'GeneList',
-  components: {GeneListItem},
-  emits: ['selected-gene', 'update:gene-grid', 'close-dialog'],
+  name: "GeneList",
+  components: { GeneListItem },
+  emits: ["selected-gene", "update:gene-grid", "close-dialog"],
   props: {
     geneGrid: {
-      type: Array
+      type: Array,
     },
     selectedGeneIndex: {
       type: Array,
       default: () => {
-        return [1, 1]
-      }
-    }
+        return [1, 1];
+      },
+    },
   },
   setup(props, context) {
-    const $q = useQuasar()
-    const loadingGeneList = ref(true)
-    const reactiveGeneGrid = toRef(props, 'geneGrid')
-    const refGeneGrid = ref(reactiveGeneGrid)
-    const reactiveGeneIndex = toRef(props, 'selectedGeneIndex')
-    const canNotUseGeneList = ref([])
-    const geneMap = ref([])
-    const geneStars = ref(0)
+    const $q = useQuasar();
+    const loadingGeneList = ref(true);
+    const reactiveGeneGrid = toRef(props, "geneGrid");
+    const refGeneGrid = ref(reactiveGeneGrid);
+    const reactiveGeneIndex = toRef(props, "selectedGeneIndex");
+    const canNotUseGeneList = ref([]);
+    const geneMap = ref([]);
+    const geneStars = ref(0);
 
-    const geneType = ref(null)
-    const geneEleType = ref(null)
-    const geneSize = ref(null)
-    const keyWord = ref(null)
+    const geneType = ref(null);
+    const geneEleType = ref(null);
+    const geneSize = ref(null);
+    const keyWord = ref(null);
 
     function initGeneList() {
       for (let i = 0; i < reactiveGeneGrid.value.length; i++) {
         if (i !== 0 && i !== reactiveGeneGrid.value.length - 1) {
           for (let j = 0; j < reactiveGeneGrid.value[i].length; j++) {
             if (j !== 0 && j !== reactiveGeneGrid.value[i].length - 1) {
-              canNotUseGeneList.value.push(reactiveGeneGrid.value[i][j])
+              canNotUseGeneList.value.push(reactiveGeneGrid.value[i][j]);
             }
           }
         }
       }
     }
 
-    function initGeneMap(typeFilter = null, eleFilter = null, sizeFilter = null, nameKey = null) {
-      loadingGeneList.value = true
-      let geneDataset = () => import('src/gene-dataset')
-      geneDataset().then((m) => {
-        geneMap.value = m.getGeneMap(typeFilter, eleFilter, sizeFilter, nameKey)
-        loadingGeneList.value = false
-      }).catch((err) => {
-        loadingGeneList.value = false
-        $q.notify({
-          type: 'negative',
-          position: 'top',
-          message: err.message
+    function initGeneMap(
+      typeFilter = null,
+      eleFilter = null,
+      sizeFilter = null,
+      nameKey = null
+    ) {
+      loadingGeneList.value = true;
+      let geneDataset = () => import("src/gene-dataset");
+      geneDataset()
+        .then((m) => {
+          geneMap.value = m.getGeneMap(
+            typeFilter,
+            eleFilter,
+            sizeFilter,
+            nameKey
+          );
+          loadingGeneList.value = false;
         })
-      })
+        .catch((err) => {
+          loadingGeneList.value = false;
+          $q.notify({
+            type: "negative",
+            position: "top",
+            message: err.message,
+          });
+        });
     }
 
     function getGeneStar() {
-      geneStars.value = refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]].star ? refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]].star : 0
+      geneStars.value = refGeneGrid.value[reactiveGeneIndex.value[0]][
+        reactiveGeneIndex.value[1]
+      ].star
+        ? refGeneGrid.value[reactiveGeneIndex.value[0]][
+            reactiveGeneIndex.value[1]
+          ].star
+        : 0;
     }
 
     function isGeneUsed(gene) {
       for (let i = 1; i < refGeneGrid.value.length - 1; i++) {
         for (let j = 1; j < refGeneGrid.value[i].length - 1; j++) {
-          if (!(i === reactiveGeneIndex.value[0] &&
-              j === reactiveGeneIndex.value[1]) &&
-            refGeneGrid.value[i][j].id === gene.id) {
-            return true
+          if (
+            !(
+              i === reactiveGeneIndex.value[0] &&
+              j === reactiveGeneIndex.value[1]
+            ) &&
+            refGeneGrid.value[i][j].id === gene.id
+          ) {
+            return true;
           }
         }
       }
-      return false
+      return false;
     }
 
     function confirmGene(gene) {
-      refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]] = {...gene}
-      context.emit('update:gene-grid', refGeneGrid.value)
-      context.emit('close-dialog')
+      refGeneGrid.value[reactiveGeneIndex.value[0]][
+        reactiveGeneIndex.value[1]
+      ] = { ...gene };
+      context.emit("update:gene-grid", refGeneGrid.value);
+      context.emit("close-dialog");
     }
 
     function changeGeneStar() {
-      refGeneGrid.value[reactiveGeneIndex.value[0]][reactiveGeneIndex.value[1]].star = geneStars.value
-      context.emit('update:gene-grid', refGeneGrid.value)
+      refGeneGrid.value[reactiveGeneIndex.value[0]][
+        reactiveGeneIndex.value[1]
+      ].star = geneStars.value;
+      context.emit("update:gene-grid", refGeneGrid.value);
     }
 
-    initGeneList()
+    initGeneList();
 
     onMounted(() => {
-      initGeneMap()
-      getGeneStar()
-    })
+      initGeneMap();
+      getGeneStar();
+    });
 
     watch([geneType, geneEleType, geneSize, keyWord], () => {
-      initGeneMap(geneType.value, geneEleType.value, geneSize.value, keyWord.value)
-    })
+      initGeneMap(
+        geneType.value,
+        geneEleType.value,
+        geneSize.value,
+        keyWord.value
+      );
+    });
 
     watch(geneStars, () => {
-      changeGeneStar()
-    })
+      changeGeneStar();
+    });
 
     return {
       geneType,
       geneEleType,
-      geneTypeOptions: ['力量', '技巧', '速度', '无'],
-      geneEleTypeOptions: ['火', '水', '雷', '冰', '龙', '无'],
+      geneTypeOptions: ["力量", "技巧", "速度", "无"],
+      geneEleTypeOptions: ["火", "水", "雷", "冰", "龙", "无"],
       geneMap,
       loadingGeneList,
       geneSize,
-      geneSizeOptions: ['小', '中', '大', '特大'],
+      geneSizeOptions: ["小", "中", "大", "特大"],
       keyWord,
       refGeneGrid,
       reactiveGeneIndex,
@@ -251,27 +277,26 @@ export default defineComponent({
       geneStarsOptions: [
         {
           value: 0,
-          label: '无'
-        }, {
+          label: "无",
+        },
+        {
           value: 1,
-          label: '等级1'
-        }, {
+          label: "等级1",
+        },
+        {
           value: 2,
-          label: '等级2'
-        }
+          label: "等级2",
+        },
       ],
 
       isGeneUsed,
-      confirmGene
-    }
-  }
-})
+      confirmGene,
+    };
+  },
+});
 </script>
 
-<style
-  lang="sass"
-  scoped
->
+<style lang="sass" scoped>
 .gene-list-wrap
   height: 90vh
 
