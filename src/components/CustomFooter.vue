@@ -2,21 +2,8 @@
   <div
     class="footer-wrap q-my-md text-grey-6 text-subtitle2 column justify-center items-center"
   >
-    <div class="row justify-end items-center q-pa-sm">
-      <q-avatar
-        class="avatar shadow-4"
-        size="md"
-        @click="openLink('https://github.com/dzxrly/mhst2factor')"
-      >
-        <img alt="avatar" src="~assets/avatar.jpeg" />
-      </q-avatar>
-    </div>
-    <div class="row justify-center items-center q-px-sm">
-      <div class="column justify-center items-center">
-        <span>By 鎧羅突擊弩賊</span>
-        <span>Copyright<q-icon name="copyright"></q-icon> {{ startYear }}</span>
-      </div>
-    </div>
+    <span>By 鎧羅突擊弩賊</span>
+    <span>Copyright<q-icon name="copyright"></q-icon> {{ startYear }}</span>
   </div>
 </template>
 
